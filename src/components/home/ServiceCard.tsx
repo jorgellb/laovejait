@@ -6,6 +6,8 @@ export type ServiceCardProps = {
   title: string;
   description: string;
   icon?: ReactNode;
+  scene?: ReactNode;
+  status?: string;
   features?: string[];
   className?: string;
   spec?: string;
@@ -16,6 +18,8 @@ export function ServiceCard({
   title,
   description,
   icon,
+  scene,
+  status,
   features,
   className,
   spec,
@@ -39,10 +43,19 @@ export function ServiceCard({
         <span className="service-index font-mono text-sm tracking-[0.2em] text-cyan">
           {index}
         </span>
-        {icon ? (
+        {status ? (
+          <span className="scene-status font-mono text-[0.58rem] tracking-[0.16em] text-cyan">
+            {status}
+          </span>
+        ) : icon ? (
           <span className="service-icon text-cyan">{icon}</span>
         ) : null}
       </div>
+      {scene ? (
+        <div className="service-scene relative mt-5" aria-hidden="true">
+          {scene}
+        </div>
+      ) : null}
       <h3 className="relative mt-5 text-xl font-semibold tracking-tight">
         {title}
       </h3>

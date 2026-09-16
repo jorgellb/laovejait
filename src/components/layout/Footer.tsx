@@ -105,6 +105,26 @@ export function Footer() {
         </div>
       </div>
       <div className="border-t border-border">
+        <div className="mx-auto flex max-w-7xl flex-col gap-6 px-4 py-8 sm:px-6">
+          <div className="flex flex-col gap-3 lg:flex-row lg:items-end lg:justify-between">
+            <div>
+              <p className="tech-label">LEVANTE NETWORK</p>
+              <ul className="mt-3 flex flex-wrap gap-x-4 gap-y-2 font-mono text-[0.62rem] tracking-[0.14em] text-muted">
+                {municipalities.map((item) => (
+                  <li key={item.slug} className="flex items-center gap-2">
+                    <span className="size-1.5 bg-cyan/70" aria-hidden="true" />
+                    {item.name}
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <p className="font-mono text-[0.62rem] tracking-[0.22em] text-cyan/80">
+              INFRASTRUCTURE {"//"} AI {"//"} SECURITY
+            </p>
+          </div>
+        </div>
+      </div>
+      <div className="border-t border-border">
         <div className="mx-auto flex max-w-7xl flex-col gap-2 px-4 py-5 text-xs text-muted sm:flex-row sm:items-center sm:justify-between sm:px-6">
           <p>© {companyConfig.copyrightYear} {companyConfig.name}</p>
           <p>

@@ -3,3 +3,8 @@ export { CoverageLegend, CoverageMap } from "@/components/graphics/CoverageMap";
 export { PipelineDiagram } from "@/components/graphics/PipelineDiagram";
 export { SectionFrame } from "@/components/graphics/SectionFrame";
 export { ServiceGlyph } from "@/components/graphics/ServiceGlyphs";
+export { AIDataPipeline, RagExplain } from "@/components/graphics/AIDataPipeline";
+export { DataFlow, FlowNode, FlowPath } from "@/components/graphics/DataFlow";
+export { ServiceScene, SectorScene } from "@/components/graphics/ServiceScenes";
+export { TechSectionDivider } from "@/components/graphics/TechSectionDivider";
+export { FieldLog } from "@/components/graphics/FieldLog";

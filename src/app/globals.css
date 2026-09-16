@@ -33,6 +33,7 @@
 html {
   scroll-behavior: smooth;
   background: var(--background);
+  overflow-x: clip;
 }
 
 body {
@@ -184,6 +185,36 @@ body::before {
     linear-gradient(180deg, transparent, rgba(5, 9, 20, 0.35));
 }
 
+.section-veil-neutral {
+  background:
+    radial-gradient(ellipse 55% 40% at 50% 100%, rgba(0, 240, 255, 0.035), transparent 62%),
+    radial-gradient(circle at 1px 1px, rgba(148, 163, 184, 0.08) 1px, transparent 0);
+  background-size: auto, 18px 18px;
+}
+
+.infra-core {
+  transition: box-shadow 0.45s ease, border-color 0.45s ease;
+}
+
+@media (hover: hover) {
+  .infra-core:hover {
+    border-color: rgba(0, 240, 255, 0.35);
+    box-shadow:
+      0 0 0 1px rgba(0, 240, 255, 0.16),
+      0 18px 50px rgba(0, 0, 0, 0.35);
+  }
+}
+
+.scene-status {
+  opacity: 0.7;
+  transition: opacity 0.3s ease;
+}
+
+.service-scene {
+  opacity: 0.78;
+  transition: opacity 0.3s ease, filter 0.3s ease;
+}
+
 .hud-scan {
   background: linear-gradient(
     180deg,
@@ -207,19 +238,50 @@ body::before {
   animation: radar-sweep 6s linear infinite;
 }
 
-.coverage-node {
-  outline: none;
+.node-ring {
+  transform-origin: center;
+  transform-box: fill-box;
+  animation: radar-ring 4.8s ease-out infinite;
 }
 
-.coverage-node:hover circle:first-child,
-.coverage-node:focus-visible circle:first-child {
+.flow-line-slow {
+  stroke-dasharray: 4 12;
+  animation: data-flow-slow 3.4s linear infinite;
+}
+
+@keyframes data-flow-slow {
+  from {
+    stroke-dashoffset: 32;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+.coverage-node {
+  outline: none;
+  pointer-events: auto;
+}
+
+.coverage-node:hover .node-shell,
+.coverage-node:focus-visible .node-shell,
+.coverage-node.is-active .node-shell {
   stroke: #00f0ff;
   stroke-width: 2px;
 }
 
 .coverage-node:hover text,
-.coverage-node:focus-visible text {
+.coverage-node:focus-visible text,
+.coverage-node.is-active text {
   fill: #00f0ff;
+}
+
+.coverage-link.is-dim {
+  opacity: 0.08;
+}
+
+.coverage-link.is-hot {
+  opacity: 0.7;
 }
 
 @keyframes hud-scan {
@@ -255,24 +317,35 @@ body::before {
 @media (hover: hover) {
   .service-card:hover,
   .service-card:focus-within {
-    background: var(--cyan);
-    color: #031014;
     border-color: var(--cyan);
-    transform: translateY(-4px);
+    transform: translateY(-3px);
+    background:
+      linear-gradient(180deg, rgba(0, 240, 255, 0.05), transparent 42%),
+      var(--background-panel);
+    box-shadow: 0 0 0 1px rgba(0, 240, 255, 0.18), 0 18px 40px rgba(0, 0, 0, 0.35);
   }
 
-  .service-card:hover .service-index,
-  .service-card:hover .service-icon,
-  .service-card:focus-within .service-index,
-  .service-card:focus-within .service-icon {
-    color: #031014;
+  .scene-status {
+    opacity: 0;
   }
 
-  .service-card:hover p,
-  .service-card:hover li,
-  .service-card:focus-within p,
-  .service-card:focus-within li {
-    color: #12343a;
+  .service-card:hover .scene-status,
+  .service-card:focus-within .scene-status {
+    opacity: 1;
+  }
+
+  .service-card:hover .service-scene,
+  .service-card:focus-within .service-scene {
+    opacity: 1;
+    filter: drop-shadow(0 0 10px rgba(0, 240, 255, 0.18));
+  }
+}
+
+@media (max-width: 639px) {
+  .coverage-label,
+  .coverage-grid,
+  .coverage-radar {
+    display: none;
   }
 }
 
@@ -284,9 +357,11 @@ body::before {
   .marquee-track,
   .pulse-dot,
   .flow-line,
+  .flow-line-slow,
   .hud-scan,
   .radar-ring,
-  .radar-sweep-arm {
+  .radar-sweep-arm,
+  .node-ring {
     animation: none;
   }
 

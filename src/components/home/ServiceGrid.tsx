@@ -1,5 +1,5 @@
-import { ServiceGlyph } from "@/components/graphics/ServiceGlyphs";
 import { SectionFrame } from "@/components/graphics/SectionFrame";
+import { ServiceScene } from "@/components/graphics/ServiceScenes";
 import { ServiceCard } from "@/components/home/ServiceCard";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { mainServices } from "@/data/services";
@@ -20,9 +20,17 @@ const specs: Record<string, string> = {
   soporte: "REMOTO + LOCAL",
 };
 
+const statuses: Record<string, string> = {
+  "inteligencia-artificial": "AI_PIPELINE // ACTIVE",
+  infraestructura: "CLUSTER // READY",
+  ciberseguridad: "SECURE_LAYER // ON",
+  redes: "NETWORK_SCAN // ACTIVE",
+  soporte: "MONITORING // LOCAL",
+};
+
 export function ServiceGrid() {
   return (
-    <SectionFrame id="servicios" className="scroll-mt-24">
+    <SectionFrame id="servicios" className="scroll-mt-24" channel="03">
       <div className="mx-auto max-w-7xl">
         <SectionHeading
           eyebrow="SERVICIOS"
@@ -33,7 +41,7 @@ export function ServiceGrid() {
           {mainServices.map((service) => (
             <div
               key={service.id}
-              id={service.id}
+              id={service.id === "inteligencia-artificial" ? undefined : service.id}
               className={`scroll-mt-24 ${spans[service.id]}`}
             >
               <ServiceCard
@@ -42,7 +50,8 @@ export function ServiceGrid() {
                 description={service.description}
                 features={service.features}
                 spec={specs[service.id]}
-                icon={<ServiceGlyph id={service.id} />}
+                status={statuses[service.id]}
+                scene={<ServiceScene id={service.id} />}
                 className="min-h-full"
               />
             </div>

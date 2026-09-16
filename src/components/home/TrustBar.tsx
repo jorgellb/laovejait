@@ -22,8 +22,14 @@ export function TrustBar() {
             key={`${item}-${index}`}
             className="mx-5 inline-flex items-center gap-5 font-mono text-[0.7rem] tracking-[0.28em] text-muted"
           >
+            <span className="font-mono text-cyan/35" aria-hidden="true">
+              [
+            </span>
             <span className="size-1.5 bg-cyan/70" aria-hidden="true" />
             {item}
+            <span className="font-mono text-cyan/35" aria-hidden="true">
+              ]
+            </span>
           </span>
         ))}
       </div>

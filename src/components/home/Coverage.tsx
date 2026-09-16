@@ -9,7 +9,7 @@ import { municipalities } from "@/data/municipalities";
 
 export function Coverage() {
   return (
-    <SectionFrame id="cobertura" tone="cyan" className="scroll-mt-24">
+    <SectionFrame id="cobertura" tone="cyan" className="scroll-mt-24" channel="07">
       <div className="mx-auto max-w-7xl">
         <SectionHeading
           eyebrow="COBERTURA"
@@ -17,7 +17,7 @@ export function Coverage() {
           description="Atendemos empresas de Vera, Mojácar, Garrucha, Huércal-Overa, Cuevas del Almanzora, Pulpí, Carboneras, Antas, Turre, Bédar, Lubrín y Los Gallardos. El soporte remoto cubre el día a día; las visitas se programan cuando hay que tocar rack, cableado o equipos en sede."
         />
         <div className="mt-12 grid items-start gap-8 lg:grid-cols-[minmax(0,1.35fr)_minmax(0,0.9fr)]">
-          <TechPanel className="p-3 sm:p-4">
+          <TechPanel className="overflow-visible p-3 sm:p-4 lg:-mr-2">
             <CoverageMap />
           </TechPanel>
           <div className="flex flex-col gap-5">
@@ -38,14 +38,19 @@ export function Coverage() {
                 ver el enfoque de Vera, un hotel de Mojácar o una nave de Pulpí:
                 no es el mismo proyecto.
               </p>
-              <CoverageLegend />
+              <div className="mt-4">
+                <CoverageLegend />
+              </div>
               <div className="mt-6">
                 <CyberButton href="/contacto">
                   Diagnosticar mi sede
                 </CyberButton>
               </div>
             </TechPanel>
-            <div className="flex flex-wrap gap-2">
+            <p className="mt-4 sm:hidden font-mono text-[0.62rem] tracking-[0.16em] text-muted">
+              SELECTOR TERRITORIAL — pulsa un municipio
+            </p>
+            <div className="flex flex-wrap gap-2" aria-label="Municipios de cobertura">
               {municipalities.map((item) => (
                 <MunicipalityLink
                   key={item.slug}

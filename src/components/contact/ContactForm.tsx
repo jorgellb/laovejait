@@ -9,7 +9,11 @@ import { serviceInquiryOptions } from "@/data/services";
 
 const initialState = { ok: false, error: "", success: "" };
 
-export function ContactForm() {
+export function ContactForm({
+  defaultService = "",
+}: {
+  defaultService?: string;
+}) {
   const [state, formAction, pending] = useActionState(
     submitContact,
     initialState,
@@ -83,7 +87,7 @@ export function ContactForm() {
             name="service"
             required
             className="border border-border bg-background px-3 py-2 text-foreground"
-            defaultValue=""
+            defaultValue={defaultService}
           >
             <option value="" disabled>
               Selecciona

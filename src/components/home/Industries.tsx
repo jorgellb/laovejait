@@ -1,4 +1,4 @@
-import { ServiceGlyph } from "@/components/graphics/ServiceGlyphs";
+import { SectorScene } from "@/components/graphics/ServiceScenes";
 import { SectionFrame } from "@/components/graphics/SectionFrame";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { TechPanel } from "@/components/ui/GlowBorder";
@@ -7,7 +7,7 @@ const sectors = [
   {
     title: "Hostelería y turismo",
     places: "Mojácar, Garrucha, Carboneras",
-    glyph: "redes",
+    scene: "tourism" as const,
     body: "Wi-Fi profesional, redes para hoteles, TPV, segmentación de invitados, ciberseguridad de recepción y caja. Cuando hay un canal digital claro, también asistentes sobre información del establecimiento y automatización de consultas repetidas.",
     services: [
       "Wi-Fi y redes de hotel",
@@ -19,7 +19,7 @@ const sectors = [
   {
     title: "Industria, logística y agricultura",
     places: "Vera, Huércal-Overa, Pulpí, Cuevas del Almanzora, Antas",
-    glyph: "infraestructura",
+    scene: "industry" as const,
     body: "Servidores, redes de nave, copias, monitorización y ciberseguridad. Sobre esa base: automatización documental, procesamiento de facturas y albaranes, y consulta de procedimientos con RAG.",
     services: [
       "Servidores y redes de almacén",
@@ -31,7 +31,7 @@ const sectors = [
   {
     title: "Comercio y despachos profesionales",
     places: "Toda la comarca",
-    glyph: "soporte",
+    scene: "mixed" as const,
     body: "Puestos de trabajo, redes de oficina, copias, Microsoft 365 u equivalentes cuando corresponda, gestión documental y soporte. La automatización entra cuando hay papeles y correos que hoy se clasifican a mano.",
     services: [
       "Puestos y ofimática",
@@ -44,7 +44,7 @@ const sectors = [
 
 export function Industries() {
   return (
-    <SectionFrame tone="cyan">
+    <SectionFrame tone="cyan" channel="06">
       <div className="mx-auto max-w-7xl">
         <SectionHeading
           eyebrow="SECTORES"
@@ -53,13 +53,9 @@ export function Industries() {
         />
         <div className="mt-12 grid gap-4 lg:grid-cols-3">
           {sectors.map((sector) => (
-            <TechPanel key={sector.title} className="flex h-full flex-col">
-              <div className="flex items-start justify-between gap-3">
-                <h3 className="text-xl font-semibold">{sector.title}</h3>
-                <span className="text-cyan">
-                  <ServiceGlyph id={sector.glyph} />
-                </span>
-              </div>
+            <TechPanel key={sector.title} className="flex h-full flex-col overflow-visible">
+              <SectorScene id={sector.scene} />
+              <h3 className="text-xl font-semibold">{sector.title}</h3>
               <p className="mt-2 font-mono text-[0.62rem] tracking-[0.16em] text-cyan uppercase">
                 {sector.places}
               </p>

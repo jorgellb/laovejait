@@ -1,4 +1,4 @@
-import { PipelineDiagram } from "@/components/graphics/PipelineDiagram";
+import { AIDataPipeline, RagExplain } from "@/components/graphics/AIDataPipeline";
 import { NeuralMesh } from "@/components/graphics/overlays";
 import { SectionFrame } from "@/components/graphics/SectionFrame";
 import { SectionHeading } from "@/components/ui/SectionHeading";
@@ -29,6 +29,7 @@ export function AIArchitecture() {
       id="inteligencia-artificial"
       tone="violet"
       className="scroll-mt-24"
+      channel="04"
     >
       <div className="mx-auto max-w-7xl">
         <SectionHeading
@@ -36,22 +37,27 @@ export function AIArchitecture() {
           title="La IA debe trabajar con el conocimiento de tu empresa."
           description="Un modelo genérico no conoce tus tarifas, tus procedimientos ni tus excepciones. El valor está en conectar el lenguaje con los archivos y sistemas que ya usáis."
         />
-        <div className="mt-12 grid gap-4 md:grid-cols-2">
-          {blocks.map((block) => (
-            <TechPanel key={block.title} className="relative overflow-hidden">
-              <span className="pointer-events-none absolute -right-4 -bottom-6 h-24 w-36 text-cyan/15">
-                <NeuralMesh />
-              </span>
-              <p className="tech-label">{block.title}</p>
-              <p className="relative mt-4 text-sm leading-relaxed text-muted sm:text-base">
-                {block.body}
-              </p>
-            </TechPanel>
-          ))}
-        </div>
         <div className="mt-12">
-          <p className="tech-label mb-4">FLUJO</p>
-          <PipelineDiagram />
+          <AIDataPipeline />
+        </div>
+        <div className="mt-12 grid items-start gap-4 lg:grid-cols-[minmax(0,1.35fr)_minmax(0,0.85fr)]">
+          <div className="grid gap-4 md:grid-cols-2">
+            {blocks.map((block) => (
+              <TechPanel key={block.title} className="relative overflow-hidden">
+                <span className="pointer-events-none absolute -right-4 -bottom-6 h-24 w-36 text-cyan/15">
+                  <NeuralMesh />
+                </span>
+                <p className="tech-label">{block.title}</p>
+                <p className="relative mt-4 text-sm leading-relaxed text-muted sm:text-base">
+                  {block.body}
+                </p>
+              </TechPanel>
+            ))}
+          </div>
+          <TechPanel className="relative overflow-hidden">
+            <p className="tech-label mb-3">RAG_LAYER</p>
+            <RagExplain />
+          </TechPanel>
         </div>
       </div>
     </SectionFrame>

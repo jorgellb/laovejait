@@ -2,6 +2,7 @@ import { CircuitLines, ScanDecor } from "@/components/graphics/overlays";
 import { IsoCore } from "@/components/home/IsoCore";
 import { CyberButton } from "@/components/ui/CyberButton";
 import { StatusIndicator, TechBadge } from "@/components/ui/TechBadge";
+import { technicianHref } from "@/config/company";
 
 export function Hero() {
   return (
@@ -28,10 +29,10 @@ export function Hero() {
           </p>
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
             <CyberButton href="/contacto?motivo=ia">
-              Desplegar IA en mi empresa
+              Estudiar un proyecto de IA
             </CyberButton>
-            <CyberButton href="/contacto" variant="secondary">
-              Asistencia técnica
+            <CyberButton href={technicianHref()} variant="secondary">
+              Hablar con un técnico
             </CyberButton>
           </div>
           <div className="mt-6 flex flex-wrap gap-2">

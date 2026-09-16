@@ -23,7 +23,13 @@ export const metadata: Metadata = {
   },
 };
 
-export default function ContactPage() {
+export default async function ContactPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ motivo?: string }>;
+}) {
+  const { motivo } = await searchParams;
+  const defaultService = motivo === "ia" ? "Proyecto de IA" : "";
   return (
     <section className="relative overflow-hidden">
       <div className="pointer-events-none absolute inset-x-0 top-0 h-16 text-cyan/20">
@@ -60,7 +66,7 @@ export default function ContactPage() {
           </CyberButton>
         </div>
       </div>
-      <ContactForm />
+      <ContactForm defaultService={defaultService} />
       </div>
     </section>
   );

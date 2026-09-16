@@ -121,7 +121,7 @@ export default async function MunicipalityPage({
               ))}
             </div>
           </div>
-          <TechPanel className="overflow-hidden p-3">
+          <TechPanel className="overflow-visible p-3">
             <CoverageMap activeSlug={data.slug} />
           </TechPanel>
         </div>
