@@ -1,9 +1,10 @@
+import { resolveSiteUrl } from "@/config/site-url";
+
 /**
  * Datos públicos de la empresa.
  * No inventar teléfono, email, dirección, CIF, horarios ni redes.
  * Completar los campos TODO_* cuando el propietario los confirme.
  */
-import { resolveSiteUrl } from "@/config/site-url";
 
 export const siteUrl = resolveSiteUrl(process.env.NEXT_PUBLIC_SITE_URL);
 
@@ -50,10 +51,10 @@ export const companyConfig = {
 } as const;
 
 export const legalPlaceholders = {
-  privacyPolicy: "TODO_PRIVACY_POLICY",
-  legalNotice: "TODO_LEGAL_NOTICE",
-  cookies: "TODO_COOKIES_POLICY",
-  dataController: "TODO_DATA_CONTROLLER",
+  privacyPolicy: "Información provisional",
+  legalNotice: "Información provisional",
+  cookies: "Información provisional",
+  dataController: "pendiente de designación",
 } as const;
 
 export function phoneHref(): string {

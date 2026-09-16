@@ -1,3 +1,4 @@
+import { SectionFrame } from "@/components/graphics/SectionFrame";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { TechPanel } from "@/components/ui/GlowBorder";
 
@@ -26,7 +27,7 @@ const items = [
 
 export function Advantages() {
   return (
-    <section className="border-b border-border px-4 py-20 sm:px-6">
+    <SectionFrame>
       <div className="mx-auto max-w-7xl">
         <SectionHeading
           eyebrow="POR QUÉ ESTE ENFOQUE"
@@ -46,6 +47,6 @@ export function Advantages() {
           ))}
         </div>
       </div>
-    </section>
+    </SectionFrame>
   );
 }

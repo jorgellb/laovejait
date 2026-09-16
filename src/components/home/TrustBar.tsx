@@ -20,8 +20,9 @@ export function TrustBar() {
         {sequence.map((item, index) => (
           <span
             key={`${item}-${index}`}
-            className="mx-6 font-mono text-[0.7rem] tracking-[0.28em] text-muted"
+            className="mx-5 inline-flex items-center gap-5 font-mono text-[0.7rem] tracking-[0.28em] text-muted"
           >
+            <span className="size-1.5 bg-cyan/70" aria-hidden="true" />
             {item}
           </span>
         ))}

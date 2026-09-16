@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { CircuitLines } from "@/components/graphics/overlays";
 import {
   companyConfig,
   mailHref,
@@ -10,7 +11,10 @@ import { mainServices } from "@/data/services";
 
 export function Footer() {
   return (
-    <footer className="border-t border-border bg-background-secondary">
+    <footer className="relative overflow-hidden border-t border-border bg-background-secondary">
+      <div className="pointer-events-none absolute inset-x-0 top-0 h-10 text-cyan/20">
+        <CircuitLines />
+      </div>
       <div className="mx-auto grid max-w-7xl gap-10 px-4 py-14 sm:px-6 lg:grid-cols-4">
         <div className="lg:col-span-1">
           <p className="font-mono text-[0.62rem] tracking-[0.28em] text-cyan">

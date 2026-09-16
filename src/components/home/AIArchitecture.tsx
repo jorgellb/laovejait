@@ -1,4 +1,6 @@
-import { DataFlow } from "@/components/ui/DataFlow";
+import { PipelineDiagram } from "@/components/graphics/PipelineDiagram";
+import { NeuralMesh } from "@/components/graphics/overlays";
+import { SectionFrame } from "@/components/graphics/SectionFrame";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { TechPanel } from "@/components/ui/GlowBorder";
 
@@ -23,9 +25,10 @@ const blocks = [
 
 export function AIArchitecture() {
   return (
-    <section
+    <SectionFrame
       id="inteligencia-artificial"
-      className="scroll-mt-24 border-b border-border px-4 py-20 sm:px-6"
+      tone="violet"
+      className="scroll-mt-24"
     >
       <div className="mx-auto max-w-7xl">
         <SectionHeading
@@ -35,9 +38,12 @@ export function AIArchitecture() {
         />
         <div className="mt-12 grid gap-4 md:grid-cols-2">
           {blocks.map((block) => (
-            <TechPanel key={block.title}>
+            <TechPanel key={block.title} className="relative overflow-hidden">
+              <span className="pointer-events-none absolute -right-4 -bottom-6 h-24 w-36 text-cyan/15">
+                <NeuralMesh />
+              </span>
               <p className="tech-label">{block.title}</p>
-              <p className="mt-4 text-sm leading-relaxed text-muted sm:text-base">
+              <p className="relative mt-4 text-sm leading-relaxed text-muted sm:text-base">
                 {block.body}
               </p>
             </TechPanel>
@@ -45,9 +51,9 @@ export function AIArchitecture() {
         </div>
         <div className="mt-12">
           <p className="tech-label mb-4">FLUJO</p>
-          <DataFlow />
+          <PipelineDiagram />
         </div>
       </div>
-    </section>
+    </SectionFrame>
   );
 }

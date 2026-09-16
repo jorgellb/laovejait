@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { legalPlaceholders } from "@/config/company";
 
 export const metadata: Metadata = {
   title: "Política de cookies",
@@ -13,7 +12,7 @@ export const metadata: Metadata = {
 export default function CookiesPage() {
   return (
     <section className="mx-auto max-w-3xl px-4 py-16 sm:px-6">
-      <p className="tech-label">{legalPlaceholders.cookies}</p>
+      <p className="tech-label">INFORMACIÓN PROVISIONAL</p>
       <h1 className="mt-4 text-4xl font-semibold">Cookies</h1>
       <p className="mt-6 text-muted">
         Esta web no instala, de momento, cookies de analítica ni de publicidad.
@@ -22,7 +21,7 @@ export default function CookiesPage() {
       </p>
       <p className="mt-4 text-muted">
         Pueden existir cookies técnicas imprescindibles del propio hosting o del
-        formulario. El inventario definitivo queda pendiente ({legalPlaceholders.cookies}).
+        formulario. El inventario definitivo se publicará cuando esté cerrado.
       </p>
       <p className="mt-8">
         <Link href="/" className="text-cyan hover:underline">

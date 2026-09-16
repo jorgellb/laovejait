@@ -1,3 +1,5 @@
+import { CircuitLines } from "@/components/graphics/overlays";
+import { SectionFrame } from "@/components/graphics/SectionFrame";
 import { ContactForm } from "@/components/contact/ContactForm";
 import { CyberButton } from "@/components/ui/CyberButton";
 import { technicianHref } from "@/config/company";
@@ -8,10 +10,10 @@ export function FinalCTA({
   showForm?: boolean;
 }) {
   return (
-    <section
-      id="contacto"
-      className="scroll-mt-24 px-4 py-20 sm:px-6"
-    >
+    <SectionFrame id="contacto" className="scroll-mt-24" divider={false}>
+      <div className="pointer-events-none absolute inset-x-0 top-8 h-24 text-cyan/15">
+        <CircuitLines />
+      </div>
       <div className="mx-auto grid max-w-7xl gap-12 lg:grid-cols-[1fr_minmax(0,28rem)]">
         <div>
           <p className="tech-label">SIGUIENTE PASO</p>
@@ -33,6 +35,6 @@ export function FinalCTA({
         </div>
         {showForm ? <ContactForm /> : null}
       </div>
-    </section>
+    </SectionFrame>
   );
 }

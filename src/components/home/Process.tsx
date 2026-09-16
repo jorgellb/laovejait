@@ -1,3 +1,4 @@
+import { SectionFrame } from "@/components/graphics/SectionFrame";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 
 const steps = [
@@ -25,7 +26,7 @@ const steps = [
 
 export function Process() {
   return (
-    <section className="border-b border-border px-4 py-20 sm:px-6">
+    <SectionFrame>
       <div className="mx-auto max-w-7xl">
         <SectionHeading
           eyebrow="PROCESO"
@@ -35,8 +36,12 @@ export function Process() {
           {steps.map((step, index) => (
             <li
               key={step.index}
-              className="relative border border-border bg-background-panel p-5"
+              className="relative border border-border bg-background-panel/90 p-5"
             >
+              <span
+                aria-hidden="true"
+                className="absolute top-0 left-0 h-px w-10 bg-cyan/60"
+              />
               <p className="font-mono text-sm tracking-[0.2em] text-cyan">
                 {step.index}
                 {" // "}
@@ -55,6 +60,6 @@ export function Process() {
           ))}
         </ol>
       </div>
-    </section>
+    </SectionFrame>
   );
 }

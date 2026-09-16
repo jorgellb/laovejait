@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { CircuitLines } from "@/components/graphics/overlays";
 import { ContactForm } from "@/components/contact/ContactForm";
 import { CyberButton } from "@/components/ui/CyberButton";
 import {
@@ -24,7 +25,11 @@ export const metadata: Metadata = {
 
 export default function ContactPage() {
   return (
-    <section className="mx-auto grid w-full max-w-7xl gap-12 px-4 py-16 sm:px-6 lg:grid-cols-[1fr_minmax(0,28rem)]">
+    <section className="relative overflow-hidden">
+      <div className="pointer-events-none absolute inset-x-0 top-0 h-16 text-cyan/20">
+        <CircuitLines />
+      </div>
+      <div className="mx-auto grid w-full max-w-7xl gap-12 px-4 py-16 sm:px-6 lg:grid-cols-[1fr_minmax(0,28rem)]">
       <div>
         <p className="tech-label">CONTACTO</p>
         <h1 className="mt-4 text-4xl font-semibold tracking-tight sm:text-5xl">
@@ -56,6 +61,7 @@ export default function ContactPage() {
         </div>
       </div>
       <ContactForm />
+      </div>
     </section>
   );
 }

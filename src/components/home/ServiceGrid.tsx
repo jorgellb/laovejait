@@ -1,3 +1,5 @@
+import { ServiceGlyph } from "@/components/graphics/ServiceGlyphs";
+import { SectionFrame } from "@/components/graphics/SectionFrame";
 import { ServiceCard } from "@/components/home/ServiceCard";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { mainServices } from "@/data/services";
@@ -10,27 +12,17 @@ const spans: Record<string, string> = {
   soporte: "md:col-span-3",
 };
 
-function ServiceMark({ id }: { id: string }) {
-  return (
-    <span
-      aria-hidden="true"
-      className="service-icon grid size-5 grid-cols-2 gap-px"
-      data-mark={id}
-    >
-      <span className="bg-cyan" />
-      <span className="border border-cyan" />
-      <span className="border border-current opacity-70" />
-      <span className="bg-current opacity-80" />
-    </span>
-  );
-}
+const specs: Record<string, string> = {
+  "inteligencia-artificial": "RAG · LLM · AGENTES",
+  infraestructura: "WIN · LINUX · NAS",
+  ciberseguridad: "FW · MFA · BACKUP",
+  redes: "VLAN · WIFI · TPV",
+  soporte: "REMOTO + LOCAL",
+};
 
 export function ServiceGrid() {
   return (
-    <section
-      id="servicios"
-      className="scroll-mt-24 border-b border-border px-4 py-20 sm:px-6"
-    >
+    <SectionFrame id="servicios" className="scroll-mt-24">
       <div className="mx-auto max-w-7xl">
         <SectionHeading
           eyebrow="SERVICIOS"
@@ -49,7 +41,8 @@ export function ServiceGrid() {
                 title={service.title}
                 description={service.description}
                 features={service.features}
-                icon={<ServiceMark id={service.id} />}
+                spec={specs[service.id]}
+                icon={<ServiceGlyph id={service.id} />}
                 className="min-h-full"
               />
             </div>
@@ -61,6 +54,6 @@ export function ServiceGrid() {
           y las necesidades reales del negocio.
         </p>
       </div>
-    </section>
+    </SectionFrame>
   );
 }

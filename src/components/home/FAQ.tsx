@@ -1,3 +1,4 @@
+import { SectionFrame } from "@/components/graphics/SectionFrame";
 import { FAQItem } from "@/components/ui/FAQItem";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import type { FaqItem as Faq } from "@/data/faqs";
@@ -12,10 +13,10 @@ export function FAQ({
   eyebrow?: string;
 }) {
   return (
-    <section className="border-b border-border px-4 py-20 sm:px-6">
+    <SectionFrame>
       <div className="mx-auto max-w-7xl">
         <SectionHeading eyebrow={eyebrow} title={title} />
-        <div className="mt-10 max-w-3xl">
+        <div className="mt-10 max-w-3xl border border-border bg-background-panel/60 px-5 sm:px-6">
           {items.map((item) => (
             <FAQItem
               key={item.question}
@@ -25,6 +26,6 @@ export function FAQ({
           ))}
         </div>
       </div>
-    </section>
+    </SectionFrame>
   );
 }

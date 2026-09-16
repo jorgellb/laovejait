@@ -1,11 +1,16 @@
-import { CyberButton } from "@/components/ui/CyberButton";
-import { StatusIndicator } from "@/components/ui/TechBadge";
+import { CircuitLines, ScanDecor } from "@/components/graphics/overlays";
 import { IsoCore } from "@/components/home/IsoCore";
+import { CyberButton } from "@/components/ui/CyberButton";
+import { StatusIndicator, TechBadge } from "@/components/ui/TechBadge";
 
 export function Hero() {
   return (
     <section className="relative overflow-hidden border-b border-border">
       <div className="scanline pointer-events-none absolute inset-0" />
+      <ScanDecor />
+      <div className="pointer-events-none absolute inset-x-0 top-0 h-28 text-cyan/20">
+        <CircuitLines />
+      </div>
       <div className="mx-auto grid max-w-7xl items-center gap-10 px-4 py-16 sm:px-6 lg:grid-cols-2 lg:py-24">
         <div>
           <p className="tech-label">
@@ -29,9 +34,13 @@ export function Hero() {
               Asistencia técnica
             </CyberButton>
           </div>
-          <p className="mt-6 font-mono text-[0.68rem] tracking-[0.18em] text-muted">
-            SERVIDORES · REDES · CIBERSEGURIDAD · IA PRIVADA · AUTOMATIZACIÓN
-          </p>
+          <div className="mt-6 flex flex-wrap gap-2">
+            <TechBadge>SERVIDORES</TechBadge>
+            <TechBadge>REDES</TechBadge>
+            <TechBadge>CIBERSEGURIDAD</TechBadge>
+            <TechBadge>IA PRIVADA</TechBadge>
+            <TechBadge>AUTOMATIZACIÓN</TechBadge>
+          </div>
           <div className="mt-8 grid max-w-lg grid-cols-3 gap-3">
             <StatusIndicator label="MONITORIZACIÓN" value="ACTIVE" />
             <StatusIndicator label="BACKUP" value="SYNC" />

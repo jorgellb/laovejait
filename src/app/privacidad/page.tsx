@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { legalPlaceholders, mailHref } from "@/config/company";
+import { mailHref } from "@/config/company";
 
 export const metadata: Metadata = {
   title: "Política de privacidad",
@@ -13,13 +13,12 @@ export const metadata: Metadata = {
 export default function PrivacyPage() {
   return (
     <section className="mx-auto max-w-3xl px-4 py-16 sm:px-6">
-      <p className="tech-label">{legalPlaceholders.privacyPolicy}</p>
+      <p className="tech-label">INFORMACIÓN PROVISIONAL</p>
       <h1 className="mt-4 text-4xl font-semibold">Política de privacidad</h1>
       <p className="mt-6 text-muted">
-        Este texto es un marcador. Falta confirmar el responsable del
-        tratamiento ({legalPlaceholders.dataController}), los datos fiscales y
-        la redacción jurídica definitiva. No debe tomarse como política
-        publicada.
+        Este texto es un borrador. Falta confirmar el responsable del
+        tratamiento, los datos fiscales y la redacción jurídica definitiva.
+        No debe tomarse como política publicada.
       </p>
       <p className="mt-4 text-muted">
         Contacto actual:{" "}

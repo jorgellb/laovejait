@@ -1,4 +1,5 @@
 import { notFound } from "next/navigation";
+import { CoverageMap } from "@/components/graphics/CoverageMap";
 import { FAQ } from "@/components/home/FAQ";
 import { FinalCTA } from "@/components/home/FinalCTA";
 import { Breadcrumbs } from "@/components/seo/Breadcrumbs";
@@ -103,21 +104,26 @@ export default async function MunicipalityPage({
       </section>
 
       <section className="border-b border-border px-4 py-16 sm:px-6">
-        <div className="mx-auto max-w-7xl">
-          <h2 className="text-2xl font-semibold">Municipios cercanos</h2>
-          <p className="mt-3 max-w-2xl text-muted">
-            El mismo equipo cubre desplazamientos entre estos núcleos cuando la
-            incidencia no se cierra en remoto.
-          </p>
-          <div className="mt-6 flex flex-wrap gap-2">
-            {nearby.map((item) => (
-              <MunicipalityLink
-                key={item.slug}
-                slug={item.slug}
-                name={item.name}
-              />
-            ))}
+        <div className="mx-auto grid max-w-7xl gap-8 lg:grid-cols-[0.9fr_1.1fr]">
+          <div>
+            <h2 className="text-2xl font-semibold">Municipios cercanos</h2>
+            <p className="mt-3 max-w-2xl text-muted">
+              El mismo equipo cubre desplazamientos entre estos núcleos cuando la
+              incidencia no se cierra en remoto.
+            </p>
+            <div className="mt-6 flex flex-wrap gap-2">
+              {nearby.map((item) => (
+                <MunicipalityLink
+                  key={item.slug}
+                  slug={item.slug}
+                  name={item.name}
+                />
+              ))}
+            </div>
           </div>
+          <TechPanel className="overflow-hidden p-3">
+            <CoverageMap activeSlug={data.slug} />
+          </TechPanel>
         </div>
       </section>
 

@@ -172,6 +172,86 @@ body::before {
   );
 }
 
+.section-veil-cyan {
+  background:
+    radial-gradient(ellipse 70% 50% at 8% 0%, rgba(0, 240, 255, 0.07), transparent 58%),
+    linear-gradient(180deg, transparent, rgba(5, 9, 20, 0.35));
+}
+
+.section-veil-violet {
+  background:
+    radial-gradient(ellipse 60% 46% at 92% 12%, rgba(191, 0, 255, 0.08), transparent 52%),
+    linear-gradient(180deg, transparent, rgba(5, 9, 20, 0.35));
+}
+
+.hud-scan {
+  background: linear-gradient(
+    180deg,
+    transparent 0%,
+    rgba(0, 240, 255, 0.05) 48%,
+    transparent 52%
+  );
+  background-size: 100% 220%;
+  animation: hud-scan 7s linear infinite;
+}
+
+.radar-ring {
+  transform-origin: 50% 50%;
+  transform-box: view-box;
+  animation: radar-ring 4.8s ease-out infinite;
+}
+
+.radar-sweep-arm {
+  transform-origin: 50% 50%;
+  transform-box: view-box;
+  animation: radar-sweep 6s linear infinite;
+}
+
+.coverage-node {
+  outline: none;
+}
+
+.coverage-node:hover circle:first-child,
+.coverage-node:focus-visible circle:first-child {
+  stroke: #00f0ff;
+  stroke-width: 2px;
+}
+
+.coverage-node:hover text,
+.coverage-node:focus-visible text {
+  fill: #00f0ff;
+}
+
+@keyframes hud-scan {
+  from {
+    background-position: 0 -40%;
+  }
+  to {
+    background-position: 0 140%;
+  }
+}
+
+@keyframes radar-ring {
+  0% {
+    opacity: 0.55;
+    transform: scale(0.86);
+  }
+  70%,
+  100% {
+    opacity: 0;
+    transform: scale(1.18);
+  }
+}
+
+@keyframes radar-sweep {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 @media (hover: hover) {
   .service-card:hover,
   .service-card:focus-within {
@@ -203,7 +283,10 @@ body::before {
 
   .marquee-track,
   .pulse-dot,
-  .flow-line {
+  .flow-line,
+  .hud-scan,
+  .radar-ring,
+  .radar-sweep-arm {
     animation: none;
   }
 

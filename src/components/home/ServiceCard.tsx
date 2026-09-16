@@ -8,6 +8,7 @@ export type ServiceCardProps = {
   icon?: ReactNode;
   features?: string[];
   className?: string;
+  spec?: string;
 };
 
 export function ServiceCard({
@@ -17,6 +18,7 @@ export function ServiceCard({
   icon,
   features,
   className,
+  spec,
 }: ServiceCardProps) {
   return (
     <article
@@ -28,6 +30,10 @@ export function ServiceCard({
       <span
         aria-hidden="true"
         className="pointer-events-none absolute -right-8 -bottom-10 h-32 w-32 rotate-12 bg-cyan/10"
+      />
+      <span
+        aria-hidden="true"
+        className="pointer-events-none absolute top-0 left-0 h-px w-16 bg-cyan/50"
       />
       <div className="relative flex items-start justify-between gap-4">
         <span className="service-index font-mono text-sm tracking-[0.2em] text-cyan">
@@ -53,6 +59,19 @@ export function ServiceCard({
           ))}
         </ul>
       ) : null}
+      <div className="relative mt-auto flex items-center justify-between gap-3 pt-6">
+        <span className="h-px flex-1 bg-border" />
+        <span className="flex gap-1" aria-hidden="true">
+          <span className="h-3 w-8 bg-cyan/30" />
+          <span className="h-3 w-4 bg-cyan/60" />
+          <span className="pulse-dot h-3 w-2 bg-cyan" />
+        </span>
+        {spec ? (
+          <span className="font-mono text-[0.58rem] tracking-[0.16em] text-cyan uppercase">
+            {spec}
+          </span>
+        ) : null}
+      </div>
     </article>
   );
 }

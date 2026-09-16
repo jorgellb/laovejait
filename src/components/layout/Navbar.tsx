@@ -66,7 +66,7 @@ export function Navbar() {
           ))}
         </nav>
 
-        <div className="hidden items-center gap-4 2xl:flex">
+        <div className="hidden items-center gap-4 xl:flex">
           <p className="flex items-center gap-2 font-mono text-[0.62rem] tracking-[0.14em] text-muted">
             <span className="pulse-dot size-2 rounded-full bg-cyan" />
             CORE_IA &amp; INFRAESTRUCTURA: ONLINE
