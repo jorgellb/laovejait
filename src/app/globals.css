@@ -1,0 +1,213 @@
+@import "tailwindcss";
+
+:root {
+  --background: #030712;
+  --background-secondary: #050914;
+  --background-elevated: #080d18;
+  --background-panel: #0b1120;
+  --foreground: #f8fafc;
+  --muted: #94a3b8;
+  --cyan: #00f0ff;
+  --violet: #bf00ff;
+  --border: rgba(148, 163, 184, 0.15);
+  --cyan-dim: rgba(0, 240, 255, 0.12);
+  --violet-dim: rgba(191, 0, 255, 0.14);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-background-secondary: var(--background-secondary);
+  --color-background-elevated: var(--background-elevated);
+  --color-background-panel: var(--background-panel);
+  --color-foreground: var(--foreground);
+  --color-muted: var(--muted);
+  --color-cyan: var(--cyan);
+  --color-violet: var(--violet);
+  --color-border: var(--border);
+  --color-cyan-dim: var(--cyan-dim);
+  --color-violet-dim: var(--violet-dim);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+html {
+  scroll-behavior: smooth;
+  background: var(--background);
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
+  font-size: 1.0625rem;
+  line-height: 1.65;
+}
+
+body::before {
+  content: "";
+  pointer-events: none;
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background-image:
+    radial-gradient(circle at 12% -10%, rgba(0, 240, 255, 0.08), transparent 42%),
+    radial-gradient(circle at 88% 8%, rgba(191, 0, 255, 0.07), transparent 36%),
+    linear-gradient(rgba(148, 163, 184, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(148, 163, 184, 0.04) 1px, transparent 1px);
+  background-size:
+    auto,
+    auto,
+    64px 64px,
+    64px 64px;
+}
+
+::selection {
+  background: rgba(0, 240, 255, 0.28);
+  color: #031014;
+}
+
+:focus-visible {
+  outline: 2px solid var(--cyan);
+  outline-offset: 3px;
+}
+
+.clip-tech {
+  clip-path: polygon(
+    12px 0,
+    100% 0,
+    100% calc(100% - 12px),
+    calc(100% - 12px) 100%,
+    0 100%,
+    0 12px
+  );
+}
+
+.corner-frame {
+  position: relative;
+}
+
+.corner-frame::before,
+.corner-frame::after {
+  content: "";
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  border-color: rgba(0, 240, 255, 0.55);
+  border-style: solid;
+  pointer-events: none;
+}
+
+.corner-frame::before {
+  top: 0;
+  left: 0;
+  border-width: 1px 0 0 1px;
+}
+
+.corner-frame::after {
+  right: 0;
+  bottom: 0;
+  border-width: 0 1px 1px 0;
+}
+
+.tech-label {
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 0.68rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--cyan);
+}
+
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee 42s linear infinite;
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes pulse-dot {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.45;
+    transform: scale(0.82);
+  }
+}
+
+.pulse-dot {
+  animation: pulse-dot 2.2s ease-in-out infinite;
+}
+
+@keyframes data-flow {
+  from {
+    stroke-dashoffset: 24;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+.flow-line {
+  stroke-dasharray: 4 6;
+  animation: data-flow 1.6s linear infinite;
+}
+
+.scanline {
+  background-image: repeating-linear-gradient(
+    to bottom,
+    transparent 0,
+    transparent 3px,
+    rgba(255, 255, 255, 0.015) 3px,
+    rgba(255, 255, 255, 0.015) 4px
+  );
+}
+
+@media (hover: hover) {
+  .service-card:hover,
+  .service-card:focus-within {
+    background: var(--cyan);
+    color: #031014;
+    border-color: var(--cyan);
+    transform: translateY(-4px);
+  }
+
+  .service-card:hover .service-index,
+  .service-card:hover .service-icon,
+  .service-card:focus-within .service-index,
+  .service-card:focus-within .service-icon {
+    color: #031014;
+  }
+
+  .service-card:hover p,
+  .service-card:hover li,
+  .service-card:focus-within p,
+  .service-card:focus-within li {
+    color: #12343a;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .marquee-track,
+  .pulse-dot,
+  .flow-line {
+    animation: none;
+  }
+
+  .service-card {
+    transform: none !important;
+  }
+}
