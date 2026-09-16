@@ -13,10 +13,8 @@ export const companyConfig = {
   tagline:
     "Servicios informáticos e integración de inteligencia artificial para empresas del Levante Almeriense.",
   url: siteUrl,
-  /** TODO_PHONE — no publicar en schema hasta confirmar */
-  phone: null as string | null,
-  /** TODO_EMAIL — no publicar en schema hasta confirmar */
-  email: null as string | null,
+  phone: "+34 623 808 058",
+  email: "info@laoveja.es",
   /** TODO_ADDRESS */
   address: null as string | null,
   postalCode: null as string | null,
@@ -58,12 +56,18 @@ export const legalPlaceholders = {
   dataController: "TODO_DATA_CONTROLLER",
 } as const;
 
+export function phoneHref(): string {
+  return `tel:${companyConfig.phone.replace(/\s+/g, "")}`;
+}
+
+export function whatsappHref(): string {
+  return `https://wa.me/${companyConfig.phone.replace(/\D/g, "")}`;
+}
+
+export function mailHref(): string {
+  return `mailto:${companyConfig.email}`;
+}
+
 export function technicianHref(): string {
-  if (companyConfig.phone) {
-    return `tel:${companyConfig.phone.replace(/\s+/g, "")}`;
-  }
-  if (companyConfig.email) {
-    return `mailto:${companyConfig.email}`;
-  }
-  return "/contacto";
+  return whatsappHref();
 }

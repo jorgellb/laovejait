@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { legalPlaceholders } from "@/config/company";
+import { legalPlaceholders, mailHref } from "@/config/company";
 
 export const metadata: Metadata = {
   title: "Política de privacidad",
@@ -22,7 +22,11 @@ export default function PrivacyPage() {
         publicada.
       </p>
       <p className="mt-4 text-muted">
-        El formulario de contacto recogerá nombre, empresa, email, teléfono,
+        Contacto actual:{" "}
+        <a href={mailHref()} className="text-cyan hover:underline">
+          info@laoveja.es
+        </a>
+        . El formulario de contacto recogerá nombre, empresa, email, teléfono,
         municipio, servicio y mensaje únicamente para atender la solicitud.
         Hasta que exista base legal y un encargado de tratamiento definidos,
         no se debe usar el formulario como canal de datos sensibles.

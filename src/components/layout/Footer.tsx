@@ -1,5 +1,10 @@
 import Link from "next/link";
-import { companyConfig } from "@/config/company";
+import {
+  companyConfig,
+  mailHref,
+  phoneHref,
+  whatsappHref,
+} from "@/config/company";
 import { municipalities } from "@/data/municipalities";
 import { mainServices } from "@/data/services";
 
@@ -57,8 +62,26 @@ export function Footer() {
                 Formulario de diagnóstico
               </Link>
             </li>
-            {companyConfig.phone ? <li>{companyConfig.phone}</li> : null}
-            {companyConfig.email ? <li>{companyConfig.email}</li> : null}
+            <li>
+              <a href={phoneHref()} className="hover:text-cyan">
+                {companyConfig.phone}
+              </a>
+            </li>
+            <li>
+              <a
+                href={whatsappHref()}
+                className="hover:text-cyan"
+                rel="noopener noreferrer"
+                target="_blank"
+              >
+                WhatsApp
+              </a>
+            </li>
+            <li>
+              <a href={mailHref()} className="hover:text-cyan">
+                {companyConfig.email}
+              </a>
+            </li>
             <li className="pt-4">
               <Link href="/privacidad" className="hover:text-cyan">
                 Privacidad

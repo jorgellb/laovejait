@@ -36,6 +36,24 @@ export function CyberButton({
   );
 
   if (href) {
+    const external =
+      href.startsWith("http") ||
+      href.startsWith("tel:") ||
+      href.startsWith("mailto:");
+    if (external) {
+      const newTab = href.startsWith("http");
+      return (
+        <a
+          href={href}
+          className={styles}
+          {...(newTab
+            ? { target: "_blank", rel: "noopener noreferrer" }
+            : {})}
+        >
+          {children}
+        </a>
+      );
+    }
     return (
       <Link href={href} className={styles}>
         {children}

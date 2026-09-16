@@ -50,6 +50,6 @@ No hace falta `vercel.json` de framework: Next.js se detecta solo. El `vercel.js
 
 ## Datos pendientes del negocio
 
-Completar en `src/config/company.ts` cuando existan: teléfono, email, dirección, CIF, coordenadas, horarios y redes sociales. Hasta entonces el JSON-LD omite esas propiedades.
+Teléfono/WhatsApp (`+34 623 808 058`) y correo (`info@laoveja.es`) ya están en `src/config/company.ts` y en el JSON-LD. Pendientes: dirección, CIF, coordenadas, horarios y redes sociales.
 
 Las páginas `/privacidad`, `/aviso-legal` y `/cookies` son marcadores jurídicos, no textos legales definitivos.
