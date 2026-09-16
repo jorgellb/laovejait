@@ -3,9 +3,9 @@
  * No inventar teléfono, email, dirección, CIF, horarios ni redes.
  * Completar los campos TODO_* cuando el propietario los confirme.
  */
-export const siteUrl = (
-  process.env.NEXT_PUBLIC_SITE_URL ?? "https://laoveja.es"
-).replace(/\/$/, "");
+import { resolveSiteUrl } from "@/config/site-url";
+
+export const siteUrl = resolveSiteUrl(process.env.NEXT_PUBLIC_SITE_URL);
 
 export const companyConfig = {
   name: "La Oveja",

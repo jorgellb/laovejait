@@ -30,7 +30,7 @@ Copia `.env.example` a `.env.local`. En Vercel, define las mismas claves en Proj
 
 | Clave | Uso |
 | --- | --- |
-| `NEXT_PUBLIC_SITE_URL` | URL canónica. En producción: `https://laoveja.es` |
+| `NEXT_PUBLIC_SITE_URL` | URL canónica. En producción: `https://laoveja.es`. Si falta o está vacía, se usa esa misma URL. |
 | `RESEND_API_KEY` | Opcional. Envío del formulario de contacto |
 | `CONTACT_TO_EMAIL` | Opcional. Buzón de destino |
 | `CONTACT_FROM_EMAIL` | Opcional. Remitente (dominio verificado en Resend) |
