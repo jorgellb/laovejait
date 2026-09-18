@@ -35,7 +35,7 @@ export function SectorDetail({ sector }: { sector: IaSector }) {
           <Breadcrumbs
             items={[
               { name: "Inicio", href: "/" },
-              { name: "Inteligencia Artificial", href: "/#ia" },
+              { name: "Inteligencia Artificial", href: "/inteligencia-artificial" },
               { name: "IA por sector", href: "/ia-por-sector" },
               { name: sector.name },
             ]}

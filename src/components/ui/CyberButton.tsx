@@ -1,5 +1,5 @@
 import Link from "next/link";
-import type { ButtonHTMLAttributes, ReactNode } from "react";
+import type { ButtonHTMLAttributes, MouseEventHandler, ReactNode } from "react";
 import { cn } from "@/lib/utils";
 
 type Variant = "primary" | "secondary" | "ghost";
@@ -9,7 +9,8 @@ type CyberButtonProps = {
   className?: string;
   variant?: Variant;
   href?: string;
-} & ButtonHTMLAttributes<HTMLButtonElement>;
+  onClick?: MouseEventHandler<HTMLButtonElement | HTMLAnchorElement>;
+} & Omit<ButtonHTMLAttributes<HTMLButtonElement>, "onClick">;
 
 function variantClass(variant: Variant): string {
   if (variant === "primary") {
@@ -27,6 +28,7 @@ export function CyberButton({
   variant = "primary",
   href,
   type = "button",
+  onClick,
   ...rest
 }: CyberButtonProps) {
   const styles = cn(
@@ -46,6 +48,7 @@ export function CyberButton({
         <a
           href={href}
           className={styles}
+          onClick={onClick}
           {...(newTab
             ? { target: "_blank", rel: "noopener noreferrer" }
             : {})}
@@ -55,14 +58,14 @@ export function CyberButton({
       );
     }
     return (
-      <Link href={href} scroll className={styles}>
+      <Link href={href} scroll className={styles} onClick={onClick}>
         {children}
       </Link>
     );
   }
 
   return (
-    <button type={type} className={styles} {...rest}>
+    <button type={type} className={styles} onClick={onClick} {...rest}>
       {children}
     </button>
   );

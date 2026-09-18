@@ -181,6 +181,7 @@ export function municipalityGraph(
       faqNode(faqs, `${siteUrl}/servicios-informaticos/${slug}#faq`),
       breadcrumbNode([
         { name: "Inicio", path: "/" },
+        { name: "Servicios", path: "/servicios" },
         { name, path: `/servicios-informaticos/${slug}` },
       ]),
     ],
@@ -200,6 +201,34 @@ export function municipalityIndexList(): JsonObject {
   };
 }
 
+export function servicePageGraph(input: {
+  path: string;
+  name: string;
+  description: string;
+  crumbs: Array<{ name: string; path: string }>;
+  faqs: FaqItem[];
+}): JsonObject {
+  return {
+    "@context": "https://schema.org",
+    "@graph": [
+      breadcrumbNode(input.crumbs),
+      {
+        "@type": "Service",
+        "@id": `${siteUrl}${input.path}#service`,
+        name: input.name,
+        description: input.description,
+        url: `${siteUrl}${input.path}`,
+        provider: { "@id": `${siteUrl}/#business` },
+        areaServed: companyConfig.areaServed.map((name) => ({
+          "@type": "AdministrativeArea",
+          name,
+        })),
+      },
+      faqNode(input.faqs, `${siteUrl}${input.path}#faq`),
+    ],
+  };
+}
+
 export function iaHubGraph(): JsonObject {
   const path = "/ia-por-sector";
   return {
@@ -207,6 +236,7 @@ export function iaHubGraph(): JsonObject {
     "@graph": [
       breadcrumbNode([
         { name: "Inicio", path: "/" },
+        { name: "Inteligencia Artificial", path: "/inteligencia-artificial" },
         { name: "IA por sector", path },
       ]),
       {
@@ -238,7 +268,7 @@ export function iaSectorGraph(sector: IaSector): JsonObject {
     "@graph": [
       breadcrumbNode([
         { name: "Inicio", path: "/" },
-        { name: "Inteligencia Artificial", path: "/#inteligencia-artificial" },
+        { name: "Inteligencia Artificial", path: "/inteligencia-artificial" },
         { name: "IA por sector", path: "/ia-por-sector" },
         { name: sector.name, path },
       ]),

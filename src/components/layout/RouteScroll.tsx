@@ -3,6 +3,11 @@
 import { usePathname, useSearchParams } from "next/navigation";
 import { useLayoutEffect, useRef } from "react";
 
+function headerOffset() {
+  const header = document.querySelector("header");
+  return (header?.getBoundingClientRect().height ?? 80) + 8;
+}
+
 function withoutSmooth(run: () => void) {
   const root = document.documentElement;
   const previous = root.style.scrollBehavior;
@@ -14,6 +19,8 @@ function withoutSmooth(run: () => void) {
 function jumpToTop() {
   withoutSmooth(() => {
     window.scrollTo(0, 0);
+    document.documentElement.scrollTop = 0;
+    document.body.scrollTop = 0;
   });
 }
 
@@ -22,12 +29,16 @@ function scrollToHash(hash: string, behavior: ScrollBehavior) {
   if (!id) return false;
   const target = document.getElementById(id);
   if (!target) return false;
+  const top = Math.max(
+    0,
+    target.getBoundingClientRect().top + window.scrollY - headerOffset(),
+  );
   if (behavior === "auto") {
     withoutSmooth(() => {
-      target.scrollIntoView({ behavior: "auto", block: "start" });
+      window.scrollTo({ top, left: 0, behavior: "auto" });
     });
   } else {
-    target.scrollIntoView({ behavior, block: "start" });
+    window.scrollTo({ top, left: 0, behavior: "smooth" });
   }
   return true;
 }
@@ -35,7 +46,7 @@ function scrollToHash(hash: string, behavior: ScrollBehavior) {
 function alignToLocation(behavior: ScrollBehavior) {
   const hash = window.location.hash;
   if (!hash) {
-    if (behavior === "auto") jumpToTop();
+    jumpToTop();
     return;
   }
   const run = () => {
@@ -82,14 +93,15 @@ export function RouteScroll() {
 
       const url = new URL(anchor.href, window.location.href);
       if (url.origin !== window.location.origin) return;
-      if (url.pathname !== window.location.pathname) return;
 
       window.setTimeout(() => {
         if (url.hash) {
-          scrollToHash(url.hash, "smooth");
+          scrollToHash(url.hash, url.pathname === window.location.pathname ? "smooth" : "auto");
           return;
         }
-        jumpToTop();
+        if (url.pathname === window.location.pathname) {
+          jumpToTop();
+        }
       }, 0);
     }
 
@@ -102,7 +114,11 @@ export function RouteScroll() {
       popped.current = false;
       return;
     }
-    alignToLocation("auto");
+    const frame = window.requestAnimationFrame(() => {
+      alignToLocation("auto");
+      window.requestAnimationFrame(() => alignToLocation("auto"));
+    });
+    return () => window.cancelAnimationFrame(frame);
   }, [pathname, searchParams]);
 
   return null;

@@ -6,8 +6,14 @@ import { technicianHref } from "@/config/company";
 
 export function FinalCTA({
   showForm = true,
+  defaultService = "",
+  origen = "/",
+  cta = "final",
 }: {
   showForm?: boolean;
+  defaultService?: string;
+  origen?: string;
+  cta?: string;
 }) {
   return (
     <SectionFrame id="contacto" className="scroll-mt-28" divider={false}>
@@ -33,8 +39,11 @@ export function FinalCTA({
             </CyberButton>
           </div>
         </div>
-        {showForm ? <ContactForm /> : null}
+        {showForm ? (
+          <ContactForm defaultService={defaultService} origen={origen} cta={cta} />
+        ) : null}
       </div>
     </SectionFrame>
   );
 }
+

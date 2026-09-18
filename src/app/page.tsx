@@ -1,13 +1,14 @@
 import type { Metadata } from "next";
-import { Advantages } from "@/components/home/Advantages";
 import { AIArchitecture } from "@/components/home/AIArchitecture";
+import { Capabilities } from "@/components/home/Capabilities";
 import { Coverage } from "@/components/home/Coverage";
 import { FAQ } from "@/components/home/FAQ";
 import { FinalCTA } from "@/components/home/FinalCTA";
 import { Hero } from "@/components/home/Hero";
-import { Industries } from "@/components/home/Industries";
+import { Interconnect } from "@/components/home/Interconnect";
 import { Process } from "@/components/home/Process";
-import { ServiceGrid } from "@/components/home/ServiceGrid";
+import { SectorPreview } from "@/components/home/SectorPreview";
+import { SecurityTeaser } from "@/components/home/SecurityTeaser";
 import { TrustBar } from "@/components/home/TrustBar";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { siteUrl } from "@/config/company";
@@ -25,14 +26,15 @@ export default function HomePage() {
       <JsonLd data={homeGraph(homeFaqs)} />
       <Hero />
       <TrustBar />
-      <ServiceGrid />
+      <Capabilities />
+      <Interconnect />
       <AIArchitecture />
-      <Advantages />
-      <Industries />
+      <SectorPreview />
+      <SecurityTeaser />
       <Coverage />
       <Process />
       <FAQ items={homeFaqs} />
-      <FinalCTA />
+      <FinalCTA origen="/" cta="home-final" />
     </>
   );
 }

@@ -7,11 +7,11 @@
  *    URLs to IA pages just to keep traffic.
  * C) Withdrawn services with no equivalent → HTTP 410 via `src/proxy.ts`.
  *
- * `/servicios` (exact) is A: the old catalogue hub maps to the current
- * services section. `/servicios/*` is C: those slugs were agency offers.
+ * `/servicios` (exact) is now the live services hub. `/servicios/*` remains
+ * C: those slugs were agency offers and must not collide with
+ * `/servicios-informaticos/*`.
  */
 export const permanentRedirects = [
-  { source: "/servicios", destination: "/#servicios" },
   { source: "/contact", destination: "/contacto" },
   { source: "/contactanos", destination: "/contacto" },
   { source: "/privacy", destination: "/privacidad" },
@@ -81,7 +81,11 @@ export function normalizePath(pathname: string): string {
 
 export function isGonePath(pathname: string): boolean {
   const path = normalizePath(pathname);
-  if (path === "/servicios-informaticos" || path.startsWith("/servicios-informaticos/")) {
+  if (
+    path === "/servicios" ||
+    path === "/servicios-informaticos" ||
+    path.startsWith("/servicios-informaticos/")
+  ) {
     return false;
   }
   if (goneExact.has(path)) return true;

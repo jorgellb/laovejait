@@ -44,6 +44,9 @@ export function ContactForm({
         <input type="hidden" name="sector" value={sector} />
         <input type="hidden" name="cta" value={cta} />
         <input type="hidden" name="origen" value={origen} />
+        <input type="hidden" name="source_url" value={origen} />
+        <input type="hidden" name="source_page" value={origen} />
+        <input type="hidden" name="cta_position" value={cta} />
         <label className="grid gap-1 text-sm">
           Nombre
           <input

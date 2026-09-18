@@ -1,4 +1,9 @@
 import { SectionFrame } from "@/components/graphics/SectionFrame";
+import {
+  DiagramFigure,
+  ProcessCycle,
+  VerticalSteps,
+} from "@/components/graphics/system-diagrams";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 
 const steps = [
@@ -12,7 +17,7 @@ const steps = [
     index: "02",
     code: "ARCHITECT",
     title: "DISEÑAMOS",
-    body: "Arquitectura técnica adecuada al negocio: local, híbrida o en nube controlada, con límites claros de datos y de alcance.",
+    body: "Arquitectura adecuada al negocio: local, híbrida o nube controlada, con límites claros de datos y de alcance.",
   },
   {
     index: "03",
@@ -24,47 +29,44 @@ const steps = [
     index: "04",
     code: "MONITOR",
     title: "MONITORIZAMOS",
-    body: "Seguimiento, mantenimiento y mejora. La incidencia se atiende; el patrón se corrige para que no vuelva cada mes.",
+    body: "Seguimiento y mantenimiento. La incidencia se atiende; el patrón se corrige.",
+  },
+  {
+    index: "05",
+    code: "IMPROVE",
+    title: "MEJORAMOS",
+    body: "Ajustes a partir de lo medido. Improve vuelve a Scan: es un ciclo, no un embudo.",
   },
 ];
 
 export function Process() {
   return (
-    <SectionFrame channel="08">
+    <SectionFrame channel="09">
       <div className="mx-auto max-w-7xl">
         <SectionHeading
           eyebrow="PROCESO"
           title="Un pipeline técnico, no un embudo de ventas."
         />
-        <ol className="relative mt-12 grid gap-4 md:grid-cols-4">
-          <span
-            aria-hidden="true"
-            className="pointer-events-none absolute top-7 right-[6%] left-[6%] hidden h-px bg-cyan/25 md:block"
-          />
+        <div className="mt-10">
+          <DiagramFigure
+            title="SCAN → IMPROVE → SCAN"
+            caption="La salida de Improve alimenta de nuevo el análisis. No hay etapa final de «cerrar la venta»."
+          >
+            <ProcessCycle />
+            <VerticalSteps
+              className="mt-4 md:hidden"
+              items={steps.map((step) => `${step.code} — ${step.title}`)}
+            />
+          </DiagramFigure>
+        </div>
+        <ol className="mt-8 grid gap-4 md:grid-cols-5">
           {steps.map((step) => (
-            <li
-              key={step.index}
-              className="relative border border-border bg-background-panel/90 p-5"
-            >
-              <span
-                aria-hidden="true"
-                className="absolute top-0 left-0 h-px w-10 bg-cyan/60"
-              />
-              <span
-                aria-hidden="true"
-                className="absolute -top-1.5 left-1/2 hidden size-3 -translate-x-1/2 border border-cyan bg-background md:block"
-              />
+            <li key={step.index} className="border border-border bg-background-panel/90 p-4">
               <p className="font-mono text-sm tracking-[0.2em] text-cyan">
-                {step.index}
-                {" // "}
-                {step.title}
+                {step.index} {"//"} {step.code}
               </p>
-              <p className="mt-2 font-mono text-[0.58rem] tracking-[0.16em] text-muted">
-                {step.code}
-              </p>
-              <p className="mt-4 text-sm leading-relaxed text-muted">
-                {step.body}
-              </p>
+              <h3 className="mt-3 text-lg font-semibold">{step.title}</h3>
+              <p className="mt-3 text-sm leading-relaxed text-muted">{step.body}</p>
             </li>
           ))}
         </ol>

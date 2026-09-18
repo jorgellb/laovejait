@@ -73,6 +73,7 @@ export function IsoCore() {
           <FlowNode x={280} y={390} label="FIREWALL" sub="PERÍMETRO" accent />
           <FlowNode x={480} y={390} label="CRM" sub="EMAIL · API" />
           <FlowNode x={180} y={478} label="NETWORK" sub="VLAN · TPV" />
+          <FlowNode x={380} y={478} label="AGENT" sub="TOOLS" accent />
         </svg>
 
         <svg
@@ -98,7 +99,7 @@ export function IsoCore() {
         </svg>
       </div>
       <p className="px-3 pb-3 font-mono text-[0.58rem] tracking-[0.16em] text-muted">
-        SERVER / NETWORK → DATA → RAG / VECTOR → LLM → AUTOMATION → ERP / API
+        SERVER → NETWORK → DATA → VECTOR / RAG → LLM → AGENT → ERP / API
       </p>
     </div>
   );

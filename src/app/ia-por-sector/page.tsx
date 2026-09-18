@@ -57,7 +57,7 @@ export default function IaPorSectorPage() {
             <Breadcrumbs
               items={[
                 { name: "Inicio", href: "/" },
-                { name: "Inteligencia Artificial", href: "/#ia" },
+                { name: "Inteligencia Artificial", href: "/inteligencia-artificial" },
                 { name: "IA por sector" },
               ]}
             />

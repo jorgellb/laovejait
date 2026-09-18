@@ -22,7 +22,7 @@ export default function GonePage() {
       </p>
       <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
         <CyberButton href="/">Inicio</CyberButton>
-        <CyberButton href="/#servicios" variant="secondary">
+        <CyberButton href="/servicios" variant="secondary">
           Servicios actuales
         </CyberButton>
         <Link href="/contacto" className="px-3 py-3 text-sm text-cyan hover:underline">

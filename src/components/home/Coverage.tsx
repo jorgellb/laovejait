@@ -41,9 +41,12 @@ export function Coverage() {
               <div className="mt-4">
                 <CoverageLegend />
               </div>
-              <div className="mt-6">
+              <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
                 <CyberButton href="/contacto">
                   Diagnosticar mi sede
+                </CyberButton>
+                <CyberButton href="/cobertura" variant="secondary">
+                  Hub de cobertura
                 </CyberButton>
               </div>
             </TechPanel>

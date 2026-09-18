@@ -17,22 +17,28 @@ export function Hero() {
           <p className="tech-label">
             SERVICIOS IT {"//"} IA GENERATIVA {"//"} LEVANTE ALMERIENSE
           </p>
-          <h1 className="mt-5 text-balance text-4xl font-semibold tracking-[-0.04em] text-foreground sm:text-5xl lg:text-[4.6rem] lg:leading-[0.95]">
-            Infraestructura Informática e Integración de IA Generativa en el
-            Levante Almeriense
+          <h1 className="mt-5 text-balance text-4xl font-semibold tracking-[-0.04em] text-foreground sm:text-5xl lg:text-[4.2rem] lg:leading-[0.95]">
+            Infraestructura informática e inteligencia artificial para empresas.
           </h1>
           <p className="mt-6 max-w-xl text-base text-muted sm:text-lg">
-            Soporte técnico presencial, ciberseguridad, mantenimiento de
-            servidores e implementación de LLMs privados, sistemas RAG y
-            automatización con IA para empresas de Vera, Mojácar, Huércal-Overa
-            y todo el Levante Almeriense.
+            Diseñamos, mantenemos y conectamos servidores, redes, seguridad,
+            datos y sistemas de inteligencia artificial para que la tecnología
+            soporte la operación real de la empresa.
           </p>
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
             <CyberButton href="/contacto">Solicitar diagnóstico</CyberButton>
-            <CyberButton href={technicianHref()} variant="secondary">
-              Hablar con un técnico
+            <CyberButton href="#capacidades" variant="secondary">
+              Explorar capacidades
             </CyberButton>
           </div>
+          <p className="mt-4">
+            <a
+              href={technicianHref()}
+              className="text-sm text-cyan hover:underline"
+            >
+              Hablar con un técnico
+            </a>
+          </p>
           <div className="mt-6 flex flex-wrap gap-2">
             <TechBadge>SERVIDORES</TechBadge>
             <TechBadge>REDES</TechBadge>

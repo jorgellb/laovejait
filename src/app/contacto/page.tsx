@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Breadcrumbs } from "@/components/seo/Breadcrumbs";
 import { CircuitLines } from "@/components/graphics/overlays";
 import { ContactForm } from "@/components/contact/ContactForm";
 import { CyberButton } from "@/components/ui/CyberButton";
@@ -11,6 +12,7 @@ import {
 } from "@/config/company";
 import { documentMetadata } from "@/lib/metadata";
 import { getIaSector } from "@/data/ia-sectors";
+import { serviceQueryMap } from "@/data/site-nav";
 
 export const metadata: Metadata = {
   ...documentMetadata(
@@ -28,12 +30,18 @@ export default async function ContactPage({
     sector?: string;
     cta?: string;
     origen?: string;
+    servicio?: string;
   }>;
 }) {
-  const { motivo, sector, cta, origen } = await searchParams;
+  const { motivo, sector, cta, origen, servicio } = await searchParams;
   const selectedSector = sector ? getIaSector(sector) : undefined;
+  const mapped =
+    servicio && servicio in serviceQueryMap
+      ? serviceQueryMap[servicio as keyof typeof serviceQueryMap]
+      : undefined;
   const defaultService =
-    motivo === "ia" || selectedSector ? "Proyecto de IA" : "";
+    mapped ??
+    (motivo === "ia" || selectedSector ? "Proyecto de IA" : "");
   return (
     <section className="relative overflow-hidden">
       <div className="pointer-events-none absolute inset-x-0 top-0 h-16 text-cyan/20">
@@ -41,7 +49,13 @@ export default async function ContactPage({
       </div>
       <div className="mx-auto grid w-full max-w-7xl gap-12 px-4 py-16 sm:px-6 lg:grid-cols-[1fr_minmax(0,28rem)]">
       <div>
-        <p className="tech-label">CONTACTO</p>
+        <Breadcrumbs
+          items={[
+            { name: "Inicio", href: "/" },
+            { name: "Contacto" },
+          ]}
+        />
+        <p className="tech-label mt-8">CONTACTO</p>
         <h1 className="mt-4 text-4xl font-semibold tracking-tight sm:text-5xl">
           Solicitar diagnóstico
         </h1>

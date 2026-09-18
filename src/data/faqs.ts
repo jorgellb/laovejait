@@ -81,3 +81,129 @@ export function municipalityFaqs(municipality: Municipality): FaqItem[] {
     municipality.uniqueFaq,
   ];
 }
+
+export const serviciosFaqs: FaqItem[] = [
+  {
+    question: "¿Trabajáis cada servicio por separado?",
+    answer:
+      "No. Un servidor sin copias, una red sin segmentar o una IA sin permisos no resuelven el problema: lo desplazan. Diagnosticamos el sistema y priorizamos la capa que está frenando al resto.",
+  },
+  {
+    question: "¿Empezáis siempre por inteligencia artificial?",
+    answer:
+      "No. Si la red cae, las copias no se restauran o nadie sabe quién accede a qué, primero se ordena esa base. La IA entra cuando hay datos localizables y un proceso claro que automatizar.",
+  },
+  {
+    question: "¿Cómo decidís las prioridades?",
+    answer:
+      "Por impacto operativo: qué impide trabajar hoy, qué perderíais si un disco falla, y qué tareas repetidas consumen horas cada semana. El orden lo marca el negocio, no un catálogo.",
+  },
+];
+
+export const iaFaqs: FaqItem[] = [
+  {
+    question: "¿Instaláis un chatbot y ya está?",
+    answer:
+      "No. Un chatbot sobre procesos rotos solo acelera el desorden. Diseñamos consulta de conocimiento, asistencia a personas y, cuando hay límites claros, ejecución de tareas.",
+  },
+  {
+    question: "¿Qué es un RAG empresarial?",
+    answer:
+      "Un sistema que recupera fragmentos de vuestra documentación —manuales, tarifas, contratos, procedimientos— y los usa como contexto para responder. La calidad depende de fuentes, permisos y actualización.",
+  },
+  {
+    question: "¿Los agentes actúan solos en el ERP?",
+    answer:
+      "Solo dentro de permisos definidos. Lo habitual es que clasifiquen, extraigan y propongan; una persona aprueba antes de escribir en el sistema. La ejecución autónoma se acota caso a caso.",
+  },
+  {
+    question: "¿El modelo tiene que estar en local?",
+    answer:
+      "No siempre. Local, híbrido o cloud controlado se elige según privacidad, coste y rendimiento. Lo que no debe salir de la organización se deja fuera, con independencia del proveedor del modelo.",
+  },
+];
+
+export const infraFaqs: FaqItem[] = [
+  {
+    question: "¿Solo instaláis servidores nuevos?",
+    answer:
+      "También mantenemos, documentamos y migráis lo que ya hay. Un servidor sin inventario ni monitorización es una improvisación pospuesta, da igual lo reciente que sea el hardware.",
+  },
+  {
+    question: "¿Trabajáis con Windows Server y Linux?",
+    answer:
+      "Sí. El criterio es qué sostiene la operativa: directorio, archivos, virtualización o aplicaciones. No forzamos un sistema operativo por moda.",
+  },
+  {
+    question: "¿Cuándo tiene sentido virtualizar?",
+    answer:
+      "Cuando hay varios servicios que no deberían compartir un único fallo, o cuando hay que probar, migrar o recuperar sin apagar toda la oficina. Si hay una sola carga y está clara, a veces un host bien mantenido basta.",
+  },
+];
+
+export const cyberFaqs: FaqItem[] = [
+  {
+    question: "¿La ciberseguridad es un producto único?",
+    answer:
+      "No. Es un conjunto de capas: perímetro, identidad, puesto, datos y copias recuperables. Un antivirus sin copias o un firewall sin MFA deja huecos que el negocio nota el día que falla algo.",
+  },
+  {
+    question: "¿Hacéis auditorías de hacking?",
+    answer:
+      "No vendemos teatro de pentest. Trabajamos hardening, accesos, segmentación, backups y recuperación. Si hace falta una prueba especializada, se encarga con alcance explícito.",
+  },
+  {
+    question: "¿Las copias sirven si no se prueban?",
+    answer:
+      "No. Una copia que no se ha restaurado es una hipótesis. Programamos copias y comprobamos que se pueden recuperar, no solo que el job está en verde.",
+  },
+];
+
+export const networkFaqs: FaqItem[] = [
+  {
+    question: "¿Por qué separar TPV, invitados e IoT?",
+    answer:
+      "Para que un problema en la red de invitados o en un sensor no arrastre caja, oficina o almacén. La VLAN no es un adorno: reduce exposición y aísla fallos.",
+  },
+  {
+    question: "¿Montáis Wi-Fi de consumo en un hotel?",
+    answer:
+      "Si el tráfico, el roaming y el número de clientes lo desbordan, no. Diseñamos cobertura y capacidad alrededor del uso real: recepción, habitaciones, terraza o almacén.",
+  },
+  {
+    question: "¿El cableado sigue siendo necesario?",
+    answer:
+      "Sí, en TPV, servidores, cámaras fijas y puntos que no pueden depender de radio. El Wi-Fi cubre movilidad; el cobre cubre lo que no puede fallar a media servicio.",
+  },
+];
+
+export const supportFaqs: FaqItem[] = [
+  {
+    question: "¿El soporte es solo remoto?",
+    answer:
+      "Remoto cuando basta; presencial en el Levante Almeriense cuando hay que tocar rack, cableado, Wi-Fi o un equipo que no se diagnostica a distancia.",
+  },
+  {
+    question: "¿Cerráis el ticket y desaparecéis?",
+    answer:
+      "No si la causa puede repetirse. Documentamos lo resuelto y, cuando el patrón es claro, lo convertimos en mantenimiento: actualización, copia, permiso o cambio de red.",
+  },
+  {
+    question: "¿Atendéis PCs y también servidor?",
+    answer:
+      "Sí. Un puesto que no imprime suele ser síntoma de red, permisos o servidor. El diagnóstico mira el sistema, no solo el síntoma.",
+  },
+];
+
+export const coverageFaqs: FaqItem[] = [
+  {
+    question: "¿Cubris todo el Levante Almeriense?",
+    answer:
+      "Sí: Vera, Mojácar, Garrucha, Huércal-Overa, Cuevas del Almanzora, Pulpí, Carboneras, Antas, Turre, Bédar, Lubrín y Los Gallardos. El remoto cubre el día a día; la visita se programa cuando hay que intervenir in situ.",
+  },
+  {
+    question: "¿Es el mismo servicio en costa y en nave?",
+    answer:
+      "La base técnica es la misma; el diseño no. Un hotel necesita cobertura y TPV; una nave, servidor, copias y red de almacén. Por eso cada municipio tiene su propia página.",
+  },
+];

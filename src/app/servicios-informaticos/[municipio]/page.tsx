@@ -54,7 +54,7 @@ export default async function MunicipalityPage({
           <Breadcrumbs
             items={[
               { name: "Inicio", href: "/" },
-              { name: "Servicios informáticos", href: "/#servicios" },
+              { name: "Servicios", href: "/servicios" },
               { name: data.name },
             ]}
           />
@@ -72,7 +72,7 @@ export default async function MunicipalityPage({
           </p>
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
             <CyberButton href="/contacto">Solicitar diagnóstico</CyberButton>
-            <CyberButton href="/#servicios" variant="secondary">
+            <CyberButton href="/servicios" variant="secondary">
               Ver servicios
             </CyberButton>
           </div>

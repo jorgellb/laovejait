@@ -1,6 +1,6 @@
 import { describe, it } from "node:test";
 import assert from "node:assert/strict";
-import { isGonePath, normalizePath } from "./legacy-routes.ts";
+import { isGonePath, normalizePath, redirectDestination } from "./legacy-routes.ts";
 
 describe("legacy routes", () => {
   it("does not treat current municipal landings as gone", () => {
@@ -15,8 +15,9 @@ describe("legacy routes", () => {
     assert.equal(isGonePath("/blog/una-entrada"), true);
   });
 
-  it("keeps the generic /servicios path for a permanent redirect", () => {
+  it("keeps the live /servicios hub indexable and not redirected", () => {
     assert.equal(isGonePath("/servicios"), false);
+    assert.equal(redirectDestination("/servicios"), undefined);
   });
 
   it("normalizes trailing slashes", () => {

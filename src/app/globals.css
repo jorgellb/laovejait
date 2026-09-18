@@ -250,6 +250,72 @@ body::before {
   animation: data-flow-slow 3.4s linear infinite;
 }
 
+.arch-block {
+  fill: #0b1120;
+  stroke: rgba(0, 240, 255, 0.42);
+  stroke-width: 1.15;
+}
+
+.arch-gate {
+  fill: rgba(191, 0, 255, 0.08);
+  stroke: rgba(191, 0, 255, 0.7);
+  stroke-width: 1.3;
+}
+
+.arch-canvas .arch-node {
+  outline: none;
+  transition: opacity 180ms ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .arch-canvas:hover .arch-node,
+  .arch-canvas:focus-within .arch-node {
+    opacity: 0.42;
+  }
+
+  .arch-canvas .arch-node:hover,
+  .arch-canvas .arch-node:focus-visible,
+  .arch-canvas .arch-node.is-active {
+    opacity: 1;
+  }
+
+  .arch-canvas .arch-node:hover .arch-block,
+  .arch-canvas .arch-node:focus-visible .arch-block,
+  .arch-canvas .arch-node.is-active .arch-block {
+    stroke: #00f0ff;
+    fill: rgba(0, 240, 255, 0.08);
+  }
+}
+
+.vlan-office { stroke: #00f0ff; }
+.vlan-tpv { stroke: #bf00ff; }
+.vlan-guest { stroke: #94a3b8; }
+.vlan-iot { stroke: #67e8f9; }
+
+.packet-ok {
+  offset-path: path("M 80 28 V 470");
+  offset-rotate: 0deg;
+  animation: packet-run 5.4s linear infinite;
+}
+
+.packet-block {
+  offset-path: path("M 200 28 V 150");
+  offset-rotate: 0deg;
+  animation: packet-block 3.2s ease-in infinite;
+}
+
+@keyframes packet-run {
+  from { offset-distance: 0%; }
+  to { offset-distance: 100%; }
+}
+
+@keyframes packet-block {
+  0% { offset-distance: 0%; opacity: 1; }
+  70% { offset-distance: 100%; opacity: 1; }
+  85% { offset-distance: 100%; opacity: 0; }
+  100% { offset-distance: 0%; opacity: 0; }
+}
+
 @keyframes data-flow-slow {
   from {
     stroke-dashoffset: 32;
@@ -378,7 +444,9 @@ body::before {
   .hud-scan,
   .radar-ring,
   .radar-sweep-arm,
-  .node-ring {
+  .node-ring,
+  .packet-ok,
+  .packet-block {
     animation: none;
   }
 

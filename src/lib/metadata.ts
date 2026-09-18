@@ -44,10 +44,14 @@ export function documentMetadata(
   path: string,
   title: string,
   description: string,
+  options?: { absolute?: boolean },
 ): Metadata {
   const url = absoluteUrl(path);
+  const displayTitle = options?.absolute
+    ? title
+    : `${title} | ${companyConfig.legalName}`;
   return {
-    title,
+    title: options?.absolute ? { absolute: title } : title,
     description,
     alternates: { canonical: path },
     openGraph: {
@@ -55,12 +59,12 @@ export function documentMetadata(
       locale: "es_ES",
       url,
       siteName: companyConfig.legalName,
-      title: `${title} | ${companyConfig.legalName}`,
+      title: displayTitle,
       description,
     },
     twitter: {
       card: "summary_large_image",
-      title: `${title} | ${companyConfig.legalName}`,
+      title: displayTitle,
       description,
     },
   };

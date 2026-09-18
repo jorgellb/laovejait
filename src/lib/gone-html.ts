@@ -2,7 +2,7 @@ import { companyConfig, siteUrl } from "@/config/company";
 
 export function goneHtml(): string {
   const home = siteUrl;
-  const services = `${siteUrl}/#servicios`;
+  const services = `${siteUrl}/servicios`;
   const contact = `${siteUrl}/contacto`;
   return `<!doctype html>
 <html lang="es">

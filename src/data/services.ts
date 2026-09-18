@@ -35,7 +35,7 @@ export const mainServices: ServiceCardContent[] = [
       "Integración con ERP, CRM, correo y APIs internas",
       "Arquitectura elegida según privacidad, coste y rendimiento",
     ],
-    href: "/#inteligencia-artificial",
+    href: "/inteligencia-artificial",
   },
   {
     index: "02",
@@ -49,7 +49,7 @@ export const mainServices: ServiceCardContent[] = [
       "Monitorización y mantenimiento preventivo",
       "Diagnóstico, actualizaciones y migraciones",
     ],
-    href: "/#infraestructura",
+    href: "/infraestructura-ti",
   },
   {
     index: "03",
@@ -63,7 +63,7 @@ export const mainServices: ServiceCardContent[] = [
       "Backups automatizados y copias externas",
       "Pruebas de recuperación y monitorización",
     ],
-    href: "/#ciberseguridad",
+    href: "/ciberseguridad",
   },
   {
     index: "04",
@@ -77,7 +77,7 @@ export const mainServices: ServiceCardContent[] = [
       "Cableado y switches gestionables",
       "Redes para TPV, almacenes y oficinas",
     ],
-    href: "/#servicios",
+    href: "/redes-wifi-tpv",
   },
   {
     index: "05",
@@ -91,7 +91,7 @@ export const mainServices: ServiceCardContent[] = [
       "PCs, servidores, redes y software",
       "Respuesta prioritaria en el Levante Almeriense",
     ],
-    href: "/contacto",
+    href: "/soporte-tecnico",
   },
 ];
 

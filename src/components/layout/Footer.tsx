@@ -8,8 +8,14 @@ import {
   whatsappHref,
 } from "@/config/company";
 import { footerPrioritySectors, iaSectorPath } from "@/data/ia-sectors";
-import { municipalities } from "@/data/municipalities";
-import { mainServices } from "@/data/services";
+import { contactHref, serviceLinks } from "@/data/site-nav";
+
+const coveragePriority = [
+  { href: "/servicios-informaticos/vera", label: "Vera" },
+  { href: "/servicios-informaticos/mojacar", label: "Mojácar" },
+  { href: "/servicios-informaticos/huercal-overa", label: "Huércal-Overa" },
+  { href: "/servicios-informaticos/pulpi", label: "Pulpí" },
+];
 
 export function Footer() {
   return (
@@ -18,36 +24,27 @@ export function Footer() {
         <CircuitLines />
       </div>
       <div className="mx-auto grid max-w-7xl gap-10 px-4 py-14 sm:px-6 lg:grid-cols-5">
-        <div className="lg:col-span-1">
+        <div>
           <p className="font-mono text-[0.62rem] tracking-[0.28em] text-cyan">
             {companyConfig.legalName.toUpperCase()}
           </p>
           <p className="mt-4 max-w-sm text-sm text-muted">
             {companyConfig.tagline}
           </p>
-          <ul className="mt-6 space-y-2 text-sm text-muted">
-            <li>
-              <a href={phoneHref()} className="hover:text-cyan">
-                {companyConfig.phone}
-              </a>
-            </li>
-            <li>
-              <a href={mailHref()} className="hover:text-cyan">
-                {companyConfig.email}
-              </a>
-            </li>
-            <li>{companyConfig.domain}</li>
-            <li>{formatPostalAddress()}</li>
-          </ul>
         </div>
 
         <div>
           <p className="tech-label">Servicios</p>
           <ul className="mt-4 space-y-2 text-sm">
-            {mainServices.map((service) => (
-              <li key={service.id}>
-                <Link href={service.href} scroll className="text-muted hover:text-cyan">
-                  {service.title.replace(" para Empresas", "")}
+            <li>
+              <Link href="/inteligencia-artificial" scroll className="text-muted hover:text-cyan">
+                Inteligencia artificial
+              </Link>
+            </li>
+            {serviceLinks.map((item) => (
+              <li key={item.href}>
+                <Link href={item.href} scroll className="text-muted hover:text-cyan">
+                  {item.label.replace(", Wi-Fi y TPV", "")}
                 </Link>
               </li>
             ))}
@@ -77,19 +74,20 @@ export function Footer() {
         </div>
 
         <div>
-          <p className="tech-label">Municipios</p>
-          <ul className="mt-4 grid grid-cols-1 gap-2 text-sm sm:grid-cols-2">
-            {municipalities.map((item) => (
-              <li key={item.slug}>
-                <Link
-                  href={`/servicios-informaticos/${item.slug}`}
-                  scroll
-                  className="text-muted hover:text-cyan"
-                >
-                  {item.name}
+          <p className="tech-label">Cobertura</p>
+          <ul className="mt-4 space-y-2 text-sm">
+            {coveragePriority.map((item) => (
+              <li key={item.href}>
+                <Link href={item.href} scroll className="text-muted hover:text-cyan">
+                  {item.label}
                 </Link>
               </li>
             ))}
+            <li>
+              <Link href="/cobertura" scroll className="text-cyan hover:underline">
+                Más municipios →
+              </Link>
+            </li>
           </ul>
         </div>
 
@@ -97,9 +95,14 @@ export function Footer() {
           <p className="tech-label">Contacto</p>
           <ul className="mt-4 space-y-2 text-sm text-muted">
             <li>
-              <Link href="/contacto" scroll className="hover:text-cyan">
-                Formulario de diagnóstico
-              </Link>
+              <a href={phoneHref()} className="hover:text-cyan">
+                {companyConfig.phone}
+              </a>
+            </li>
+            <li>
+              <a href={mailHref()} className="hover:text-cyan">
+                {companyConfig.email}
+              </a>
             </li>
             <li>
               <a
@@ -111,7 +114,17 @@ export function Footer() {
                 WhatsApp
               </a>
             </li>
-            <li className="pt-4">
+            <li>
+              <Link
+                href={contactHref({ cta: "footer", origen: "/" })}
+                scroll
+                className="hover:text-cyan"
+              >
+                Diagnóstico
+              </Link>
+            </li>
+            <li className="pt-4">{formatPostalAddress()}</li>
+            <li>
               <Link href="/aviso-legal" className="hover:text-cyan">
                 Aviso legal
               </Link>
@@ -135,33 +148,13 @@ export function Footer() {
         </div>
       </div>
       <div className="border-t border-border">
-        <div className="mx-auto flex max-w-7xl flex-col gap-6 px-4 py-8 sm:px-6">
-          <div className="flex flex-col gap-3 lg:flex-row lg:items-end lg:justify-between">
-            <div>
-              <p className="tech-label">LEVANTE NETWORK</p>
-              <ul className="mt-3 flex flex-wrap gap-x-4 gap-y-2 font-mono text-[0.62rem] tracking-[0.14em] text-muted">
-                {municipalities.map((item) => (
-                  <li key={item.slug} className="flex items-center gap-2">
-                    <span className="size-1.5 bg-cyan/70" aria-hidden="true" />
-                    {item.name}
-                  </li>
-                ))}
-              </ul>
-            </div>
-            <p className="font-mono text-[0.62rem] tracking-[0.22em] text-cyan/80">
-              INFRASTRUCTURE {"//"} AI {"//"} SECURITY
-            </p>
-          </div>
-        </div>
-      </div>
-      <div className="border-t border-border">
         <div className="mx-auto flex max-w-7xl flex-col gap-2 px-4 py-5 text-xs text-muted sm:flex-row sm:items-center sm:justify-between sm:px-6">
           <p>
             © {companyConfig.copyrightYear} {companyConfig.legalName}
           </p>
           <p>
-            Servicios informáticos e integración de inteligencia artificial para
-            empresas del Levante Almeriense.
+            Infraestructura informática, seguridad e inteligencia artificial
+            para empresas del Levante Almeriense.
           </p>
         </div>
       </div>
