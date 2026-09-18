@@ -4,23 +4,19 @@ import { ContactForm } from "@/components/contact/ContactForm";
 import { CyberButton } from "@/components/ui/CyberButton";
 import {
   companyConfig,
+  formatPostalAddress,
   mailHref,
   phoneHref,
   technicianHref,
 } from "@/config/company";
-import { absoluteUrl } from "@/lib/metadata";
+import { documentMetadata } from "@/lib/metadata";
 
 export const metadata: Metadata = {
-  title: "Contacto y diagnóstico informático",
-  description:
+  ...documentMetadata(
+    "/contacto",
+    "Contacto y diagnóstico informático",
     "Solicita un diagnóstico de infraestructura, redes, ciberseguridad o un proyecto de IA para tu empresa en el Levante Almeriense.",
-  alternates: { canonical: "/contacto" },
-  openGraph: {
-    url: absoluteUrl("/contacto"),
-    title: "Contacto y diagnóstico informático | La Oveja",
-    description:
-      "Cuéntanos qué falla o qué quieres automatizar. Analizamos el entorno y proponemos una solución concreta.",
-  },
+  ),
 };
 
 export default async function ContactPage({
@@ -59,6 +55,7 @@ export default async function ContactPage({
               {companyConfig.email}
             </a>
           </li>
+          <li>{formatPostalAddress()}</li>
         </ul>
         <div className="mt-8 flex flex-col gap-3 sm:flex-row">
           <CyberButton href={technicianHref()} variant="secondary">

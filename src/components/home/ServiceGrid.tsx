@@ -20,17 +20,13 @@ const specs: Record<string, string> = {
   soporte: "REMOTO + LOCAL",
 };
 
-const statuses: Record<string, string> = {
-  "inteligencia-artificial": "AI_PIPELINE // ACTIVE",
-  infraestructura: "CLUSTER // READY",
-  ciberseguridad: "SECURE_LAYER // ON",
-  redes: "NETWORK_SCAN // ACTIVE",
-  soporte: "MONITORING // LOCAL",
+const statuses: Record<string, string | undefined> = {
+  "inteligencia-artificial": "AI_PIPELINE",
 };
 
 export function ServiceGrid() {
   return (
-    <SectionFrame id="servicios" className="scroll-mt-24" channel="03">
+    <SectionFrame id="servicios" className="scroll-mt-28" channel="03">
       <div className="mx-auto max-w-7xl">
         <SectionHeading
           eyebrow="SERVICIOS"
@@ -42,7 +38,7 @@ export function ServiceGrid() {
             <div
               key={service.id}
               id={service.id === "inteligencia-artificial" ? undefined : service.id}
-              className={`scroll-mt-24 ${spans[service.id]}`}
+              className={`scroll-mt-28 ${spans[service.id]}`}
             >
               <ServiceCard
                 index={service.index}

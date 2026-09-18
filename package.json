@@ -11,7 +11,7 @@
     "start": "next start",
     "lint": "eslint",
     "typecheck": "tsc --noEmit",
-    "test": "node --experimental-strip-types --test src/config/site-url.test.ts"
+    "test": "node --experimental-strip-types --test src/config/site-url.test.ts src/config/legacy-routes.test.ts"
   },
   "dependencies": {
     "framer-motion": "^13.3.0",

@@ -19,7 +19,7 @@ export function AIDataPipeline() {
       <div className="mb-4 flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
         <p className="tech-label">AI_PIPELINE</p>
         <p className="font-mono text-[0.58rem] tracking-[0.16em] text-muted">
-          COMPANY DATA → SISTEMAS EXISTENTES
+          Lectura técnica: documentos → chunks → embeddings → vector DB → retrieval → RAG → LLM → agente → ERP / API
         </p>
       </div>
       <ul className="mb-4 flex flex-wrap gap-2" aria-hidden="true">

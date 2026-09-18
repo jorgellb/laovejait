@@ -31,9 +31,6 @@ export async function submitContact(
   return {
     ok: true,
     error: "",
-    success:
-      result.delivery === "email"
-        ? "Solicitud enviada. Te contactaremos con los datos que has facilitado."
-        : "Solicitud registrada. Cuando el correo de entrega esté configurado, este formulario enviará el mensaje automáticamente. Mientras tanto, guarda una copia o vuelve a intentarlo más adelante.",
+    success: "Solicitud enviada. Te contactaremos con los datos que has facilitado.",
   };
 }

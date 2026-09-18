@@ -2,6 +2,7 @@ import Link from "next/link";
 import { CircuitLines } from "@/components/graphics/overlays";
 import {
   companyConfig,
+  formatPostalAddress,
   mailHref,
   phoneHref,
   whatsappHref,
@@ -18,15 +19,25 @@ export function Footer() {
       <div className="mx-auto grid max-w-7xl gap-10 px-4 py-14 sm:px-6 lg:grid-cols-4">
         <div className="lg:col-span-1">
           <p className="font-mono text-[0.62rem] tracking-[0.28em] text-cyan">
-            LA OVEJA
+            {companyConfig.legalName.toUpperCase()}
           </p>
           <p className="mt-4 max-w-sm text-sm text-muted">
             {companyConfig.tagline}
           </p>
-          <p className="mt-6 flex items-center gap-2 font-mono text-[0.62rem] tracking-[0.16em] text-muted">
-            <span className="size-2 bg-cyan" />
-            SYSTEM STATUS {"//"} OPERATIONAL
-          </p>
+          <ul className="mt-6 space-y-2 text-sm text-muted">
+            <li>
+              <a href={phoneHref()} className="hover:text-cyan">
+                {companyConfig.phone}
+              </a>
+            </li>
+            <li>
+              <a href={mailHref()} className="hover:text-cyan">
+                {companyConfig.email}
+              </a>
+            </li>
+            <li>{companyConfig.domain}</li>
+            <li>{formatPostalAddress()}</li>
+          </ul>
         </div>
 
         <div>
@@ -34,7 +45,7 @@ export function Footer() {
           <ul className="mt-4 space-y-2 text-sm">
             {mainServices.map((service) => (
               <li key={service.id}>
-                <Link href={service.href} className="text-muted hover:text-cyan">
+                <Link href={service.href} scroll className="text-muted hover:text-cyan">
                   {service.title.replace(" para Empresas", "")}
                 </Link>
               </li>
@@ -49,6 +60,7 @@ export function Footer() {
               <li key={item.slug}>
                 <Link
                   href={`/servicios-informaticos/${item.slug}`}
+                  scroll
                   className="text-muted hover:text-cyan"
                 >
                   {item.name}
@@ -62,14 +74,9 @@ export function Footer() {
           <p className="tech-label">Contacto</p>
           <ul className="mt-4 space-y-2 text-sm text-muted">
             <li>
-              <Link href="/contacto" className="hover:text-cyan">
+              <Link href="/contacto" scroll className="hover:text-cyan">
                 Formulario de diagnóstico
               </Link>
-            </li>
-            <li>
-              <a href={phoneHref()} className="hover:text-cyan">
-                {companyConfig.phone}
-              </a>
             </li>
             <li>
               <a
@@ -81,24 +88,24 @@ export function Footer() {
                 WhatsApp
               </a>
             </li>
-            <li>
-              <a href={mailHref()} className="hover:text-cyan">
-                {companyConfig.email}
-              </a>
-            </li>
             <li className="pt-4">
-              <Link href="/privacidad" className="hover:text-cyan">
-                Privacidad
-              </Link>
-            </li>
-            <li>
               <Link href="/aviso-legal" className="hover:text-cyan">
                 Aviso legal
               </Link>
             </li>
             <li>
+              <Link href="/privacidad" className="hover:text-cyan">
+                Privacidad
+              </Link>
+            </li>
+            <li>
               <Link href="/cookies" className="hover:text-cyan">
                 Cookies
+              </Link>
+            </li>
+            <li>
+              <Link href="/terminos-y-condiciones" className="hover:text-cyan">
+                Términos y condiciones
               </Link>
             </li>
           </ul>
@@ -126,7 +133,9 @@ export function Footer() {
       </div>
       <div className="border-t border-border">
         <div className="mx-auto flex max-w-7xl flex-col gap-2 px-4 py-5 text-xs text-muted sm:flex-row sm:items-center sm:justify-between sm:px-6">
-          <p>© {companyConfig.copyrightYear} {companyConfig.name}</p>
+          <p>
+            © {companyConfig.copyrightYear} {companyConfig.legalName}
+          </p>
           <p>
             Servicios informáticos e integración de inteligencia artificial para
             empresas del Levante Almeriense.

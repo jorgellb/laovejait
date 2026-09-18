@@ -7,6 +7,7 @@ type Tone = "cyan" | "violet" | "neutral";
 export function SectionFrame({
   children,
   id,
+  aliasId,
   className,
   tone = "neutral",
   divider = true,
@@ -14,6 +15,7 @@ export function SectionFrame({
 }: {
   children: React.ReactNode;
   id?: string;
+  aliasId?: string;
   className?: string;
   tone?: Tone;
   divider?: boolean;
@@ -23,13 +25,20 @@ export function SectionFrame({
     <section
       id={id}
       className={cn(
-        "relative overflow-hidden border-b border-border",
+        "relative overflow-hidden border-b border-border scroll-mt-28",
         tone === "cyan" && "section-veil-cyan",
         tone === "violet" && "section-veil-violet",
         tone === "neutral" && "section-veil-neutral",
         className,
       )}
     >
+      {aliasId ? (
+        <span
+          id={aliasId}
+          aria-hidden="true"
+          className="pointer-events-none absolute top-0 left-0 size-px scroll-mt-28"
+        />
+      ) : null}
       <TechGrid className="text-cyan" />
       {divider ? (
         <div className="pointer-events-none absolute inset-x-0 top-0 z-0 text-cyan/70">

@@ -41,7 +41,7 @@ export function IsoCore() {
           className="hidden h-auto w-full text-cyan md:block"
           viewBox="0 0 560 540"
           role="img"
-          aria-label="Arquitectura: documentos, servidores, seguridad e IA conectados a un núcleo central"
+          aria-label="Arquitectura: servidor, red, datos, RAG, modelo y automatización conectados a un núcleo central"
         >
           <g opacity="0.1" stroke="currentColor" strokeWidth="0.4">
             {Array.from({ length: 8 }, (_, i) => (
@@ -63,11 +63,11 @@ export function IsoCore() {
           <FlowPath d="M280 282 V379" delay="1.4s" />
           <FlowPath d="M480 261 V379" delay="0.9s" />
           <FlowPath d="M269 390 H191" delay="1.6s" />
-          <FlowNode x={280} y={40} label="DOCUMENTS" sub="PDF · PROC" />
+          <FlowNode x={280} y={40} label="DATA" sub="DOCUMENTS" />
           <FlowNode x={280} y={130} label="RAG_INDEX" sub="RETRIEVAL" accent />
           <FlowNode x={450} y={130} label="VECTOR_DB" sub="ÍNDICE" />
           <FlowNode x={80} y={250} label="SERVER" sub="WIN · LINUX" />
-          <FlowNode x={280} y={258} label="AI_CORE" sub="LLM · AGENTES" hub />
+          <FlowNode x={280} y={258} label="AI_CORE" sub="LLM · AUTO" hub />
           <FlowNode x={480} y={250} label="ERP_API" sub="CONECTORES" />
           <FlowNode x={80} y={390} label="BACKUP" sub="COPIA EXTERNA" />
           <FlowNode x={280} y={390} label="FIREWALL" sub="PERÍMETRO" accent />
@@ -87,7 +87,7 @@ export function IsoCore() {
           <FlowPath d="M182 210 H249" delay="0.8s" />
           <FlowPath d="M160 232 V304" delay="1.1s" />
           <FlowPath d="M60 221 V368" delay="0.4s" />
-          <FlowNode x={160} y={30} label="DOCUMENTS" />
+          <FlowNode x={160} y={30} label="DATA" />
           <FlowNode x={160} y={100} label="RAG / VECTOR" accent />
           <FlowNode x={60} y={210} label="SERVER" />
           <FlowNode x={160} y={210} label="AI_CORE" hub />
@@ -98,7 +98,7 @@ export function IsoCore() {
         </svg>
       </div>
       <p className="px-3 pb-3 font-mono text-[0.58rem] tracking-[0.16em] text-muted">
-        DATA_CHANNEL {"//"} INFRAESTRUCTURA + IA
+        SERVER / NETWORK → DATA → RAG / VECTOR → LLM → AUTOMATION → ERP / API
       </p>
     </div>
   );

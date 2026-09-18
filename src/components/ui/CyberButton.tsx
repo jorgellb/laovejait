@@ -55,7 +55,7 @@ export function CyberButton({
       );
     }
     return (
-      <Link href={href} className={styles}>
+      <Link href={href} scroll className={styles}>
         {children}
       </Link>
     );

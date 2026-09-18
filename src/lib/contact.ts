@@ -133,7 +133,7 @@ export async function deliverContact(payload: ContactPayload): Promise<ContactRe
     return {
       ok: false,
       error:
-        "No hemos podido enviar el mensaje ahora mismo. Inténtalo de nuevo o usa el teléfono cuando esté publicado.",
+        "No hemos podido enviar el mensaje ahora mismo. Inténtalo de nuevo o llama al teléfono publicado en la web.",
     };
   }
 

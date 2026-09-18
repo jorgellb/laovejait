@@ -48,8 +48,8 @@ Sin `RESEND_API_KEY` y `CONTACT_TO_EMAIL`, el formulario valida los datos pero n
 
 No hace falta `vercel.json` de framework: Next.js se detecta solo. El `vercel.json` del repo solo añade cabeceras de seguridad.
 
-## Datos pendientes del negocio
+## Datos de la empresa
 
-Teléfono/WhatsApp (`+34 623 808 058`) y correo (`info@laoveja.es`) ya están en `src/config/company.ts` y en el JSON-LD. Pendientes: dirección, CIF, coordenadas, horarios y redes sociales.
+Teléfono/WhatsApp (`+34 623 808 058`), correo (`info@laoveja.es`), NIF, domicilio y textos legales viven en `src/config/company.ts` y se reutilizan en el JSON-LD y en `/aviso-legal`, `/privacidad`, `/cookies` y `/terminos-y-condiciones`.
 
-Las páginas `/privacidad`, `/aviso-legal` y `/cookies` son marcadores jurídicos, no textos legales definitivos.
+Pendientes de confirmar por el titular si se quieren publicar: coordenadas, horarios y redes sociales. No están inventados en la web.

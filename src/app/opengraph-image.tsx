@@ -30,7 +30,7 @@ export default function OpenGraphImage() {
             fontFamily: "monospace",
           }}
         >
-          LA OVEJA · LEVANTE ALMERIENSE
+          LA OVEJA IT · LEVANTE ALMERIENSE
         </div>
         <div style={{ display: "flex", flexDirection: "column" }}>
           <div style={{ fontSize: 64, fontWeight: 600, lineHeight: 1.05 }}>

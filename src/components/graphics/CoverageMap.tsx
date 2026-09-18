@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useMemo, useState } from "react";
 import { coverageNodes, coverageViewBox, landPath, coastPath } from "@/data/coverage-geo";
 import {
@@ -22,6 +23,12 @@ const profileLabel: Record<BusinessProfile, string> = {
   mixed: "Mixto / interior",
 };
 
+const profileCode: Record<BusinessProfile, string> = {
+  tourism: "TOURISM NODE",
+  industry: "BUSINESS NODE",
+  mixed: "MIXED NODE",
+};
+
 function nodeBySlug(slug: string) {
   return coverageNodes.find((item) => item.slug === slug);
 }
@@ -29,9 +36,15 @@ function nodeBySlug(slug: string) {
 function previewFor(municipality: Municipality) {
   return {
     title: municipality.name,
+    code: profileCode[municipality.businessProfile],
     profile: profileLabel[municipality.businessProfile],
-    items: municipality.localServices.slice(0, 3),
+    items: municipality.localServices.slice(0, 4),
+    href: municipalityHref(municipality.slug),
   };
+}
+
+function isDesktopPointer() {
+  return window.matchMedia("(hover: hover) and (pointer: fine)").matches;
 }
 
 export function CoverageMap({
@@ -41,8 +54,9 @@ export function CoverageMap({
   activeSlug?: string;
   className?: string;
 }) {
+  const [selected, setSelected] = useState(activeSlug ?? "vera");
   const [hovered, setHovered] = useState<string | null>(null);
-  const focus = hovered ?? activeSlug ?? null;
+  const focus = hovered ?? selected;
 
   const links = useMemo(
     () =>
@@ -59,7 +73,7 @@ export function CoverageMap({
   );
 
   const vera = nodeBySlug("vera");
-  const previewMunicipality = focus ? getMunicipality(focus) : null;
+  const previewMunicipality = getMunicipality(focus);
   const preview = previewMunicipality ? previewFor(previewMunicipality) : null;
   const neighbors = previewMunicipality
     ? new Set([previewMunicipality.slug, ...previewMunicipality.nearby])
@@ -67,6 +81,27 @@ export function CoverageMap({
 
   return (
     <div className={cn("relative", className)}>
+      <label className="mb-3 grid gap-1 sm:hidden">
+        <span className="font-mono text-[0.62rem] tracking-[0.16em] text-muted">
+          SELECTOR TERRITORIAL
+        </span>
+        <select
+          className="border border-border bg-background px-3 py-2 text-sm text-foreground"
+          value={selected}
+          onChange={(event) => setSelected(event.target.value)}
+          aria-label="Seleccionar municipio de cobertura"
+        >
+          {coverageNodes.map((node) => {
+            const municipality = getMunicipality(node.slug);
+            if (!municipality) return null;
+            return (
+              <option key={node.slug} value={node.slug}>
+                {municipality.name}
+              </option>
+            );
+          })}
+        </select>
+      </label>
       <svg
         className="h-auto w-full text-cyan"
         viewBox={`0 0 ${coverageViewBox.width} ${coverageViewBox.height}`}
@@ -143,6 +178,11 @@ export function CoverageMap({
               onMouseLeave={() => setHovered(null)}
               onFocus={() => setHovered(node.slug)}
               onBlur={() => setHovered(null)}
+              onClick={(event) => {
+                if (isDesktopPointer()) return;
+                event.preventDefault();
+                setSelected(node.slug);
+              }}
             >
               <circle cx={node.x} cy={node.y} r={hub ? 18 : 13} fill="transparent" />
               <circle
@@ -192,6 +232,9 @@ export function CoverageMap({
           <p className="font-mono text-[0.58rem] tracking-[0.16em] text-cyan">
             {preview.title.toUpperCase()}
           </p>
+          <p className="mt-1 font-mono text-[0.58rem] tracking-[0.14em] text-muted">
+            {preview.code}
+          </p>
           <p className="mt-1 text-[0.7rem] text-muted">{preview.profile}</p>
           <ul className="mt-2 space-y-1 text-[0.7rem] text-foreground/80">
             {preview.items.map((item) => (
@@ -199,8 +242,31 @@ export function CoverageMap({
             ))}
           </ul>
           <p className="mt-2 font-mono text-[0.58rem] tracking-[0.14em] text-cyan">
-            VER SERVICIOS →
+            VER SERVICIOS EN {preview.title.toUpperCase()} →
           </p>
+        </div>
+      ) : null}
+      {preview ? (
+        <div className="mt-4 border border-border bg-background-panel/90 p-4 sm:hidden">
+          <p className="font-mono text-[0.58rem] tracking-[0.16em] text-cyan">
+            {preview.title.toUpperCase()}
+          </p>
+          <p className="mt-1 font-mono text-[0.58rem] tracking-[0.14em] text-muted">
+            {preview.code}
+          </p>
+          <p className="mt-2 text-sm text-muted">{preview.profile}</p>
+          <ul className="mt-3 space-y-1 text-sm text-foreground/85">
+            {preview.items.map((item) => (
+              <li key={item}>{item}</li>
+            ))}
+          </ul>
+          <Link
+            href={preview.href}
+            scroll
+            className="mt-4 inline-flex font-mono text-[0.62rem] tracking-[0.16em] text-cyan"
+          >
+            VER SERVICIOS EN {preview.title.toUpperCase()} →
+          </Link>
         </div>
       ) : null}
     </div>

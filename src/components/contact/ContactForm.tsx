@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useActionState } from "react";
 import { submitContact } from "@/app/contacto/actions";
 import { CyberButton } from "@/components/ui/CyberButton";
@@ -112,13 +113,13 @@ export function ContactForm({
           <input name="website" tabIndex={-1} autoComplete="off" />
         </div>
         <label className="flex items-start gap-3 text-sm text-muted">
-          <input name="privacy" type="checkbox" required className="mt-1" />
+          <input name="privacy" type="checkbox" value="on" required className="mt-1" />
           <span>
-            He leído la{" "}
-            <a href="/privacidad" className="text-cyan underline-offset-2 hover:underline">
-              información sobre protección de datos
-            </a>
-            . El texto jurídico definitivo está pendiente de revisión.
+            He leído y acepto la{" "}
+            <Link href="/privacidad" className="text-cyan underline-offset-2 hover:underline">
+              política de privacidad
+            </Link>
+            .
           </span>
         </label>
         {state.error ? (

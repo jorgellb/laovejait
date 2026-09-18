@@ -18,18 +18,14 @@ export const rootMetadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
     default: defaultTitle,
-    template: `%s | ${companyConfig.name}`,
+    template: `%s | ${companyConfig.legalName}`,
   },
   description: defaultDescription,
-  applicationName: companyConfig.name,
-  alternates: {
-    canonical: "/",
-  },
+  applicationName: companyConfig.legalName,
   openGraph: {
     type: "website",
     locale: "es_ES",
-    url: siteUrl,
-    siteName: companyConfig.name,
+    siteName: companyConfig.legalName,
     title: defaultTitle,
     description: defaultDescription,
   },
@@ -44,6 +40,32 @@ export const rootMetadata: Metadata = {
   },
 };
 
+export function documentMetadata(
+  path: string,
+  title: string,
+  description: string,
+): Metadata {
+  const url = absoluteUrl(path);
+  return {
+    title,
+    description,
+    alternates: { canonical: path },
+    openGraph: {
+      type: "website",
+      locale: "es_ES",
+      url,
+      siteName: companyConfig.legalName,
+      title: `${title} | ${companyConfig.legalName}`,
+      description,
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${title} | ${companyConfig.legalName}`,
+      description,
+    },
+  };
+}
+
 export function municipalityMetadata(municipality: Municipality): Metadata {
   const path = `/servicios-informaticos/${municipality.slug}`;
   return {
@@ -54,7 +76,7 @@ export function municipalityMetadata(municipality: Municipality): Metadata {
       type: "website",
       locale: "es_ES",
       url: absoluteUrl(path),
-      siteName: companyConfig.name,
+      siteName: companyConfig.legalName,
       title: municipality.metaTitle,
       description: municipality.metaDescription,
     },

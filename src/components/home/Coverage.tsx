@@ -9,7 +9,7 @@ import { municipalities } from "@/data/municipalities";
 
 export function Coverage() {
   return (
-    <SectionFrame id="cobertura" tone="cyan" className="scroll-mt-24" channel="07">
+    <SectionFrame id="cobertura" tone="cyan" className="scroll-mt-28" channel="07">
       <div className="mx-auto max-w-7xl">
         <SectionHeading
           eyebrow="COBERTURA"
@@ -47,8 +47,8 @@ export function Coverage() {
                 </CyberButton>
               </div>
             </TechPanel>
-            <p className="mt-4 sm:hidden font-mono text-[0.62rem] tracking-[0.16em] text-muted">
-              SELECTOR TERRITORIAL — pulsa un municipio
+            <p className="hidden font-mono text-[0.62rem] tracking-[0.16em] text-muted sm:block">
+              Landings municipales
             </p>
             <div className="flex flex-wrap gap-2" aria-label="Municipios de cobertura">
               {municipalities.map((item) => (

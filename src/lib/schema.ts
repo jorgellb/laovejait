@@ -15,22 +15,15 @@ function omitEmpty(value: JsonObject): JsonObject {
   );
 }
 
-function postalAddress(): JsonObject | undefined {
-  if (
-    !companyConfig.address &&
-    !companyConfig.postalCode &&
-    !companyConfig.locality
-  ) {
-    return undefined;
-  }
-  return omitEmpty({
+function postalAddress(): JsonObject {
+  return {
     "@type": "PostalAddress",
-    streetAddress: companyConfig.address,
-    postalCode: companyConfig.postalCode,
-    addressLocality: companyConfig.locality,
-    addressRegion: companyConfig.region,
-    addressCountry: companyConfig.country,
-  });
+    streetAddress: companyConfig.address.street,
+    postalCode: companyConfig.address.postalCode,
+    addressLocality: companyConfig.address.locality,
+    addressRegion: companyConfig.address.region,
+    addressCountry: "ES",
+  };
 }
 
 function geo(): JsonObject | undefined {
@@ -54,7 +47,8 @@ export function localBusinessNode(): JsonObject {
   return omitEmpty({
     "@type": ["LocalBusiness", "ProfessionalService"],
     "@id": `${siteUrl}/#business`,
-    name: companyConfig.name,
+    name: companyConfig.legalName,
+    alternateName: companyConfig.name,
     url: siteUrl,
     image: `${siteUrl}/opengraph-image`,
     telephone: companyConfig.phone,
@@ -70,11 +64,15 @@ export function localBusinessNode(): JsonObject {
     })),
     knowsAbout: [
       "Mantenimiento informático",
+      "Soporte técnico",
       "Ciberseguridad",
       "Infraestructura TI",
+      "Redes y Wi-Fi profesional",
+      "Copias de seguridad",
       "Inteligencia artificial generativa",
       "Sistemas RAG",
       "Agentes de IA",
+      "Automatización empresarial",
     ],
     hasOfferCatalog: {
       "@type": "OfferCatalog",
@@ -96,7 +94,7 @@ export function websiteNode(): JsonObject {
     "@type": "WebSite",
     "@id": `${siteUrl}/#website`,
     url: siteUrl,
-    name: companyConfig.name,
+    name: companyConfig.legalName,
     inLanguage: "es-ES",
     publisher: { "@id": `${siteUrl}/#business` },
   };
@@ -178,8 +176,7 @@ export function municipalityGraph(
       faqNode(faqs, `${siteUrl}/servicios-informaticos/${slug}#faq`),
       breadcrumbNode([
         { name: "Inicio", path: "/" },
-        { name: "Servicios informáticos", path: "/#servicios" },
-        { name: name, path: `/servicios-informaticos/${slug}` },
+        { name, path: `/servicios-informaticos/${slug}` },
       ]),
     ],
   };

@@ -32,6 +32,7 @@
 
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: 7rem;
   background: var(--background);
   overflow-x: clip;
 }

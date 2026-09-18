@@ -57,10 +57,10 @@ export function Process() {
               <p className="font-mono text-sm tracking-[0.2em] text-cyan">
                 {step.index}
                 {" // "}
-                {step.code}
-              </p>
-              <p className="mt-2 text-sm font-semibold tracking-wide">
                 {step.title}
+              </p>
+              <p className="mt-2 font-mono text-[0.58rem] tracking-[0.16em] text-muted">
+                {step.code}
               </p>
               <p className="mt-4 text-sm leading-relaxed text-muted">
                 {step.body}

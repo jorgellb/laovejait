@@ -1,7 +1,7 @@
 import { CircuitLines, ScanDecor } from "@/components/graphics/overlays";
 import { IsoCore } from "@/components/home/IsoCore";
 import { CyberButton } from "@/components/ui/CyberButton";
-import { StatusIndicator, TechBadge } from "@/components/ui/TechBadge";
+import { TechBadge } from "@/components/ui/TechBadge";
 import { technicianHref } from "@/config/company";
 
 export function Hero() {
@@ -28,9 +28,7 @@ export function Hero() {
             y todo el Levante Almeriense.
           </p>
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-            <CyberButton href="/contacto?motivo=ia">
-              Estudiar un proyecto de IA
-            </CyberButton>
+            <CyberButton href="/contacto">Solicitar diagnóstico</CyberButton>
             <CyberButton href={technicianHref()} variant="secondary">
               Hablar con un técnico
             </CyberButton>
@@ -41,11 +39,6 @@ export function Hero() {
             <TechBadge>CIBERSEGURIDAD</TechBadge>
             <TechBadge>IA PRIVADA</TechBadge>
             <TechBadge>AUTOMATIZACIÓN</TechBadge>
-          </div>
-          <div className="mt-8 grid max-w-lg grid-cols-3 gap-3">
-            <StatusIndicator label="MONITORIZACIÓN" value="ACTIVE" />
-            <StatusIndicator label="BACKUP" value="SYNC" />
-            <StatusIndicator label="AI NODE" value="ONLINE" />
           </div>
         </div>
         <IsoCore />

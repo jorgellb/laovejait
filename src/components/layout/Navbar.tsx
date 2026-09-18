@@ -7,7 +7,7 @@ import { cn } from "@/lib/utils";
 
 const links = [
   { href: "/#servicios", label: "Servicios" },
-  { href: "/#inteligencia-artificial", label: "Inteligencia Artificial" },
+  { href: "/#ia", label: "Inteligencia Artificial" },
   { href: "/#infraestructura", label: "Infraestructura" },
   { href: "/#ciberseguridad", label: "Ciberseguridad" },
   { href: "/#cobertura", label: "Cobertura" },
@@ -37,7 +37,7 @@ export function Navbar() {
         Saltar al contenido
       </a>
       <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-3 sm:px-6">
-        <Link href="/" className="flex items-center gap-3" onClick={close}>
+        <Link href="/" className="flex items-center gap-3" onClick={close} scroll>
           <span aria-hidden="true" className="grid size-8 grid-cols-2 gap-0.5">
             <span className="bg-cyan" />
             <span className="border border-cyan" />
@@ -59,6 +59,7 @@ export function Navbar() {
             <Link
               key={link.href}
               href={link.href}
+              scroll
               className="whitespace-nowrap text-sm text-muted transition-colors hover:text-foreground"
             >
               {link.label}
@@ -67,12 +68,8 @@ export function Navbar() {
         </nav>
 
         <div className="hidden items-center gap-4 xl:flex">
-          <p className="flex items-center gap-2 font-mono text-[0.62rem] tracking-[0.14em] text-muted">
-            <span className="pulse-dot size-2 rounded-full bg-cyan" />
-            CORE_IA &amp; INFRAESTRUCTURA: ONLINE
-          </p>
           <CyberButton href="/contacto" variant="secondary">
-            Solicitar asistencia
+            Solicitar diagnóstico
           </CyberButton>
         </div>
 
@@ -109,28 +106,25 @@ export function Navbar() {
           id="menu-movil"
           className="border-t border-border bg-background-secondary lg:hidden"
         >
-        <nav className="flex flex-col gap-1 px-4 py-4" aria-label="Móvil">
-          {links.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              className="px-2 py-3 text-foreground"
-              onClick={close}
-            >
-              {link.label}
-            </Link>
-          ))}
-          <p className="mt-2 flex items-center gap-2 px-2 font-mono text-[0.62rem] tracking-[0.14em] text-muted">
-            <span className="pulse-dot size-2 rounded-full bg-cyan" />
-            CORE_IA &amp; INFRAESTRUCTURA: ONLINE
-          </p>
-          <div className="mt-3">
-            <CyberButton href="/contacto" className="w-full">
-              Solicitar asistencia
-            </CyberButton>
-          </div>
-        </nav>
-      </div>
+          <nav className="flex flex-col gap-1 px-4 py-4" aria-label="Móvil">
+            {links.map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                scroll
+                className="px-2 py-3 text-foreground"
+                onClick={close}
+              >
+                {link.label}
+              </Link>
+            ))}
+            <div className="mt-3">
+              <CyberButton href="/contacto" className="w-full">
+                Solicitar diagnóstico
+              </CyberButton>
+            </div>
+          </nav>
+        </div>
       ) : null}
     </header>
   );

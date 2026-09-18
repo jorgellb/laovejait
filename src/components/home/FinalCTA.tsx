@@ -10,7 +10,7 @@ export function FinalCTA({
   showForm?: boolean;
 }) {
   return (
-    <SectionFrame id="contacto" className="scroll-mt-24" divider={false}>
+    <SectionFrame id="contacto" className="scroll-mt-28" divider={false}>
       <div className="pointer-events-none absolute inset-x-0 top-8 h-24 text-cyan/15">
         <CircuitLines />
       </div>
