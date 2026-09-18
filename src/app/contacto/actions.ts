@@ -22,6 +22,9 @@ export async function submitContact(
     message: String(formData.get("message") ?? ""),
     privacy: formData.get("privacy") === "on",
     website: String(formData.get("website") ?? ""),
+    sector: String(formData.get("sector") ?? ""),
+    cta: String(formData.get("cta") ?? ""),
+    origen: String(formData.get("origen") ?? ""),
   });
 
   if (!result.ok) {

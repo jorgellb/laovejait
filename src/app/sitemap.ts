@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next";
 import { siteUrl } from "@/config/company";
+import { getIaSectors, iaSectorPath } from "@/data/ia-sectors";
 import { municipalities } from "@/data/municipalities";
 
 export default function sitemap(): MetadataRoute.Sitemap {
@@ -41,6 +42,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "yearly",
       priority: 0.2,
     },
+    {
+      url: `${siteUrl}/ia-por-sector`,
+      lastModified: now,
+      changeFrequency: "weekly",
+      priority: 0.9,
+    },
   ];
 
   const localRoutes = municipalities.map((item) => ({
@@ -50,5 +57,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.7,
   }));
 
-  return [...staticRoutes, ...localRoutes];
+  const sectorRoutes = getIaSectors().map((item) => ({
+    url: `${siteUrl}${iaSectorPath(item.slug)}`,
+    lastModified: now,
+    changeFrequency: "monthly" as const,
+    priority: 0.8,
+  }));
+
+  return [...staticRoutes, ...localRoutes, ...sectorRoutes];
 }

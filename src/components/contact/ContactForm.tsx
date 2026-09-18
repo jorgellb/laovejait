@@ -12,19 +12,38 @@ const initialState = { ok: false, error: "", success: "" };
 
 export function ContactForm({
   defaultService = "",
+  sector = "",
+  sectorLabel = "",
+  cta = "",
+  origen = "",
 }: {
   defaultService?: string;
+  sector?: string;
+  sectorLabel?: string;
+  cta?: string;
+  origen?: string;
 }) {
   const [state, formAction, pending] = useActionState(
     submitContact,
     initialState,
   );
+  const processLabel = sector
+    ? "Proceso que quieres mejorar"
+    : "Mensaje";
 
   return (
     <GlowBorder className="relative p-5 sm:p-6">
       <p className="tech-label">SOLICITUD</p>
       <h3 className="mt-3 text-xl font-semibold">Diagnóstico inicial</h3>
+      {sectorLabel ? (
+        <p className="mt-2 font-mono text-[0.62rem] tracking-[0.16em] text-cyan uppercase">
+          Modelo {"//"} {sectorLabel}
+        </p>
+      ) : null}
       <form action={formAction} className="mt-6 grid gap-4">
+        <input type="hidden" name="sector" value={sector} />
+        <input type="hidden" name="cta" value={cta} />
+        <input type="hidden" name="origen" value={origen} />
         <label className="grid gap-1 text-sm">
           Nombre
           <input
@@ -101,7 +120,7 @@ export function ContactForm({
           </select>
         </label>
         <label className="grid gap-1 text-sm">
-          Mensaje
+          {processLabel}
           <textarea
             name="message"
             required

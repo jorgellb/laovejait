@@ -10,6 +10,7 @@ import {
   technicianHref,
 } from "@/config/company";
 import { documentMetadata } from "@/lib/metadata";
+import { getIaSector } from "@/data/ia-sectors";
 
 export const metadata: Metadata = {
   ...documentMetadata(
@@ -22,10 +23,17 @@ export const metadata: Metadata = {
 export default async function ContactPage({
   searchParams,
 }: {
-  searchParams: Promise<{ motivo?: string }>;
+  searchParams: Promise<{
+    motivo?: string;
+    sector?: string;
+    cta?: string;
+    origen?: string;
+  }>;
 }) {
-  const { motivo } = await searchParams;
-  const defaultService = motivo === "ia" ? "Proyecto de IA" : "";
+  const { motivo, sector, cta, origen } = await searchParams;
+  const selectedSector = sector ? getIaSector(sector) : undefined;
+  const defaultService =
+    motivo === "ia" || selectedSector ? "Proyecto de IA" : "";
   return (
     <section className="relative overflow-hidden">
       <div className="pointer-events-none absolute inset-x-0 top-0 h-16 text-cyan/20">
@@ -63,7 +71,13 @@ export default async function ContactPage({
           </CyberButton>
         </div>
       </div>
-      <ContactForm defaultService={defaultService} />
+      <ContactForm
+        defaultService={defaultService}
+        sector={selectedSector?.slug ?? ""}
+        sectorLabel={selectedSector?.name ?? ""}
+        cta={cta ?? ""}
+        origen={origen ?? "/contacto"}
+      />
       </div>
     </section>
   );

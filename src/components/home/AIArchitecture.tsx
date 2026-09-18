@@ -80,6 +80,24 @@ export function AIArchitecture() {
             </div>
           </TechPanel>
         </div>
+        <TechPanel className="mt-8">
+          <p className="tech-label">DATA CHANNEL {"//"} IA POR SECTOR</p>
+          <h3 className="mt-3 text-2xl font-semibold sm:text-3xl">
+            La misma tecnología. Procesos completamente distintos.
+          </h3>
+          <p className="mt-4 max-w-3xl text-sm leading-relaxed text-muted sm:text-base">
+            Una empresa industrial, una clínica y una comercializadora eléctrica
+            no necesitan la misma arquitectura de IA. Hemos modelado diferentes
+            escenarios para mostrar dónde puede intervenir la inteligencia
+            artificial, qué información necesita y qué tareas deberían continuar
+            bajo supervisión humana.
+          </p>
+          <div className="mt-6">
+            <CyberButton href="/ia-por-sector" variant="secondary">
+              Explorar modelos por sector
+            </CyberButton>
+          </div>
+        </TechPanel>
       </div>
     </SectionFrame>
   );

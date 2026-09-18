@@ -315,7 +315,23 @@ body::before {
   }
 }
 
+.sector-card {
+  transition:
+    border-color 180ms ease,
+    transform 180ms ease,
+    background-color 180ms ease;
+}
+
 @media (hover: hover) {
+  .sector-card:hover,
+  .sector-card:focus-within {
+    border-color: rgba(0, 240, 255, 0.45);
+    transform: translateY(-2px);
+    background:
+      linear-gradient(180deg, rgba(0, 240, 255, 0.04), transparent 48%),
+      var(--background-panel);
+  }
+
   .service-card:hover,
   .service-card:focus-within {
     border-color: var(--cyan);
@@ -366,7 +382,8 @@ body::before {
     animation: none;
   }
 
-  .service-card {
+  .service-card,
+  .sector-card {
     transform: none !important;
   }
 }

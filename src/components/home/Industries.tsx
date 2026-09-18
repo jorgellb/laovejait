@@ -1,5 +1,6 @@
 import { SectorScene } from "@/components/graphics/ServiceScenes";
 import { SectionFrame } from "@/components/graphics/SectionFrame";
+import { CyberButton } from "@/components/ui/CyberButton";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { TechPanel } from "@/components/ui/GlowBorder";
 
@@ -72,6 +73,11 @@ export function Industries() {
               </ul>
             </TechPanel>
           ))}
+        </div>
+        <div className="mt-8">
+          <CyberButton href="/ia-por-sector" variant="secondary">
+            Ver todos los modelos de IA por sector
+          </CyberButton>
         </div>
       </div>
     </SectionFrame>

@@ -7,6 +7,7 @@ import {
   phoneHref,
   whatsappHref,
 } from "@/config/company";
+import { footerPrioritySectors, iaSectorPath } from "@/data/ia-sectors";
 import { municipalities } from "@/data/municipalities";
 import { mainServices } from "@/data/services";
 
@@ -16,7 +17,7 @@ export function Footer() {
       <div className="pointer-events-none absolute inset-x-0 top-0 h-10 text-cyan/20">
         <CircuitLines />
       </div>
-      <div className="mx-auto grid max-w-7xl gap-10 px-4 py-14 sm:px-6 lg:grid-cols-4">
+      <div className="mx-auto grid max-w-7xl gap-10 px-4 py-14 sm:px-6 lg:grid-cols-5">
         <div className="lg:col-span-1">
           <p className="font-mono text-[0.62rem] tracking-[0.28em] text-cyan">
             {companyConfig.legalName.toUpperCase()}
@@ -47,6 +48,28 @@ export function Footer() {
               <li key={service.id}>
                 <Link href={service.href} scroll className="text-muted hover:text-cyan">
                   {service.title.replace(" para Empresas", "")}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <div>
+          <p className="tech-label">IA por sector</p>
+          <ul className="mt-4 space-y-2 text-sm">
+            <li>
+              <Link href="/ia-por-sector" scroll className="text-muted hover:text-cyan">
+                Todos los modelos
+              </Link>
+            </li>
+            {footerPrioritySectors.map((item) => (
+              <li key={item.slug}>
+                <Link
+                  href={iaSectorPath(item.slug)}
+                  scroll
+                  className="text-muted hover:text-cyan"
+                >
+                  {item.label}
                 </Link>
               </li>
             ))}

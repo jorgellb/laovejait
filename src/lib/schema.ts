@@ -1,5 +1,10 @@
 import { companyConfig, siteUrl } from "@/config/company";
 import type { FaqItem } from "@/data/faqs";
+import {
+  getIaSectors,
+  iaSectorPath,
+  type IaSector,
+} from "@/data/ia-sectors";
 import { municipalities } from "@/data/municipalities";
 import { offerCatalog } from "@/data/services";
 
@@ -192,5 +197,68 @@ export function municipalityIndexList(): JsonObject {
       name: `Servicios informáticos en ${item.name}`,
       url: `${siteUrl}/servicios-informaticos/${item.slug}`,
     })),
+  };
+}
+
+export function iaHubGraph(): JsonObject {
+  const path = "/ia-por-sector";
+  return {
+    "@context": "https://schema.org",
+    "@graph": [
+      breadcrumbNode([
+        { name: "Inicio", path: "/" },
+        { name: "IA por sector", path },
+      ]),
+      {
+        "@type": "CollectionPage",
+        "@id": `${siteUrl}${path}#page`,
+        name: "IA aplicada por sector",
+        url: `${siteUrl}${path}`,
+        isPartOf: { "@id": `${siteUrl}/#website` },
+        about: { "@id": `${siteUrl}/#business` },
+        mainEntity: {
+          "@type": "ItemList",
+          name: "Modelos de IA por sector",
+          itemListElement: getIaSectors().map((item, index) => ({
+            "@type": "ListItem",
+            position: index + 1,
+            name: item.name,
+            url: `${siteUrl}${iaSectorPath(item.slug)}`,
+          })),
+        },
+      },
+    ],
+  };
+}
+
+export function iaSectorGraph(sector: IaSector): JsonObject {
+  const path = iaSectorPath(sector.slug);
+  return {
+    "@context": "https://schema.org",
+    "@graph": [
+      breadcrumbNode([
+        { name: "Inicio", path: "/" },
+        { name: "Inteligencia Artificial", path: "/#inteligencia-artificial" },
+        { name: "IA por sector", path: "/ia-por-sector" },
+        { name: sector.name, path },
+      ]),
+      {
+        "@type": "Service",
+        "@id": `${siteUrl}${path}#service`,
+        name: sector.h1,
+        description: sector.seoDescription,
+        url: `${siteUrl}${path}`,
+        provider: { "@id": `${siteUrl}/#business` },
+        serviceType: [
+          "Inteligencia artificial aplicada",
+          "Automatización empresarial",
+        ],
+        areaServed: companyConfig.areaServed.map((name) => ({
+          "@type": "AdministrativeArea",
+          name,
+        })),
+      },
+      faqNode(sector.faqs, `${siteUrl}${path}#faq`),
+    ],
   };
 }

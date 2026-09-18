@@ -1,4 +1,5 @@
 import { companyConfig } from "@/config/company";
+import { getIaSector } from "@/data/ia-sectors";
 import {
   serviceInquiryOptions,
   type ServiceInquiryOption,
@@ -14,6 +15,9 @@ export type ContactPayload = {
   message: string;
   privacy: boolean;
   website?: string;
+  sector?: string;
+  cta?: string;
+  origen?: string;
 };
 
 export type ContactResult =
@@ -40,6 +44,10 @@ export function validateContactPayload(
   const municipality = input.municipality.trim();
   const service = input.service.trim();
   const message = input.message.trim();
+  const sector = input.sector?.trim() ?? "";
+  const cta = input.cta?.trim() ?? "";
+  const origen = input.origen?.trim() ?? "";
+  const knownSector = sector ? getIaSector(sector) : undefined;
 
   if (name.length < 2) {
     return { ok: false, error: "Indica un nombre válido." };
@@ -80,6 +88,9 @@ export function validateContactPayload(
       service,
       message,
       privacy: true,
+      sector: knownSector?.slug ?? "",
+      cta: cta.slice(0, 80),
+      origen: origen.slice(0, 180),
     },
   };
 }
@@ -101,6 +112,9 @@ export async function deliverContact(payload: ContactPayload): Promise<ContactRe
       company: data.company,
       municipality: data.municipality,
       service: data.service,
+      sector: data.sector || undefined,
+      cta: data.cta || undefined,
+      origen: data.origen || undefined,
     });
     return { ok: true, delivery: "logged" };
   }
@@ -123,6 +137,11 @@ export async function deliverContact(payload: ContactPayload): Promise<ContactRe
         `Teléfono: ${data.phone}`,
         `Municipio: ${data.municipality}`,
         `Servicio: ${data.service}`,
+        ...(data.sector
+          ? [`Sector IA: ${getIaSector(data.sector)?.name ?? data.sector}`]
+          : []),
+        ...(data.cta ? [`CTA: ${data.cta}`] : []),
+        ...(data.origen ? [`Origen: ${data.origen}`] : []),
         "",
         data.message,
       ].join("\n"),
