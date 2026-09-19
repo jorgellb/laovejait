@@ -2,12 +2,38 @@ import { municipalityPath } from "@/lib/utils";
 
 export type BusinessProfile = "tourism" | "industry" | "mixed";
 
+export const businessProfileLabel: Record<BusinessProfile, string> = {
+  tourism: "Hostelería y costa",
+  industry: "Industria y comercio",
+  mixed: "Mixto / interior",
+};
+
+export const businessProfileCode: Record<BusinessProfile, string> = {
+  tourism: "TOURISM NODE",
+  industry: "BUSINESS NODE",
+  mixed: "MIXED NODE",
+};
+
+export type MunicipalityImage = {
+  src: string;
+  width: number;
+  height: number;
+};
+
+export type MunicipalityMap = {
+  lat: number;
+  lon: number;
+  zoom: number;
+};
+
 export type Municipality = {
   slug: string;
   name: string;
   province: "Almería";
   businessProfile: BusinessProfile;
   nearby: string[];
+  image: MunicipalityImage | null;
+  map: MunicipalityMap;
   metaTitle: string;
   metaDescription: string;
   heroDescription: string;
@@ -21,6 +47,19 @@ export type Municipality = {
   };
 };
 
+const STILL_SIZE = { width: 1672, height: 941 } as const;
+
+function coverageStill(slug: string): MunicipalityImage {
+  return {
+    src: `/images/cobertura/mantenimiento-informatico-ia-${slug}-web.jpg`,
+    width: STILL_SIZE.width,
+    height: STILL_SIZE.height,
+  };
+}
+
+export const coverageStillCaption =
+  "Ilustración conceptual del servicio en el municipio. No representa un cliente concreto ni un caso publicado.";
+
 export const municipalities: Municipality[] = [
   {
     slug: "vera",
@@ -28,6 +67,8 @@ export const municipalities: Municipality[] = [
     province: "Almería",
     businessProfile: "industry",
     nearby: ["garrucha", "antas", "turre", "huercal-overa"],
+    image: coverageStill("vera"),
+    map: { lat: 37.2472, lon: -1.8681, zoom: 14 },
     metaTitle: "Mantenimiento informático e IA en Vera, Almería",
     metaDescription:
       "Soporte informático, servidores, redes, ciberseguridad e IA para comercios, almacenes y PYMEs de Vera y el Levante Almeriense.",
@@ -58,6 +99,8 @@ export const municipalities: Municipality[] = [
     province: "Almería",
     businessProfile: "tourism",
     nearby: ["garrucha", "turre", "carboneras", "vera"],
+    image: coverageStill("mojacar"),
+    map: { lat: 37.1406, lon: -1.8514, zoom: 14 },
     metaTitle: "Informática e IA para hoteles y negocios en Mojácar",
     metaDescription:
       "Wi-Fi profesional, redes para TPV, ciberseguridad y asistentes de IA para hoteles, restaurantes y comercios de Mojácar.",
@@ -89,6 +132,8 @@ export const municipalities: Municipality[] = [
     province: "Almería",
     businessProfile: "tourism",
     nearby: ["vera", "mojacar", "antas"],
+    image: coverageStill("garrucha"),
+    map: { lat: 37.1814, lon: -1.8225, zoom: 14 },
     metaTitle: "Servicios informáticos y redes en Garrucha, Almería",
     metaDescription:
       "Redes, Wi-Fi, TPV, copias de seguridad e IA para restaurantes, hoteles y comercios del puerto de Garrucha.",
@@ -120,6 +165,8 @@ export const municipalities: Municipality[] = [
     province: "Almería",
     businessProfile: "industry",
     nearby: ["pulpi", "cuevas-del-almanzora", "vera", "antas"],
+    image: coverageStill("huercal-overa"),
+    map: { lat: 37.3897, lon: -1.9431, zoom: 13 },
     metaTitle: "Informático de empresas en Huércal-Overa",
     metaDescription:
       "Servidores, redes, ciberseguridad e integración de IA para empresas y comercios de Huércal-Overa y el Almanzora.",
@@ -151,6 +198,8 @@ export const municipalities: Municipality[] = [
     province: "Almería",
     businessProfile: "industry",
     nearby: ["huercal-overa", "pulpi", "vera", "antas"],
+    image: coverageStill("cuevas-del-almanzora"),
+    map: { lat: 37.2969, lon: -1.8797, zoom: 13 },
     metaTitle: "Mantenimiento informático en Cuevas del Almanzora",
     metaDescription:
       "Servidores, redes, backup e IA documental para empresas agrícolas e industriales de Cuevas del Almanzora.",
@@ -182,6 +231,8 @@ export const municipalities: Municipality[] = [
     province: "Almería",
     businessProfile: "industry",
     nearby: ["huercal-overa", "cuevas-del-almanzora", "vera"],
+    image: coverageStill("pulpi"),
+    map: { lat: 37.4119, lon: -1.7447, zoom: 13 },
     metaTitle: "Informática industrial y IA en Pulpí, Almería",
     metaDescription:
       "Redes de nave, servidores, backup y automatización documental para empresas agroalimentarias y logísticas de Pulpí.",
@@ -212,6 +263,8 @@ export const municipalities: Municipality[] = [
     province: "Almería",
     businessProfile: "tourism",
     nearby: ["mojacar", "garrucha", "lubrin"],
+    image: coverageStill("carboneras"),
+    map: { lat: 36.9967, lon: -1.8928, zoom: 14 },
     metaTitle: "Servicios informáticos e IA en Carboneras",
     metaDescription:
       "Wi-Fi, redes, ciberseguridad y soporte TI para hostelería, comercio e industria de Carboneras, Almería.",
@@ -243,6 +296,8 @@ export const municipalities: Municipality[] = [
     province: "Almería",
     businessProfile: "industry",
     nearby: ["vera", "huercal-overa", "cuevas-del-almanzora", "garrucha"],
+    image: coverageStill("antas"),
+    map: { lat: 37.2453, lon: -1.9175, zoom: 14 },
     metaTitle: "Mantenimiento informático e IA en Antas, Almería",
     metaDescription:
       "Soporte TI, servidores, redes y automatización para empresas agrícolas y PYMEs de Antas, en el Levante Almeriense.",
@@ -272,6 +327,8 @@ export const municipalities: Municipality[] = [
     province: "Almería",
     businessProfile: "mixed",
     nearby: ["mojacar", "vera", "garrucha", "los-gallardos"],
+    image: coverageStill("turre"),
+    map: { lat: 37.1522, lon: -1.895, zoom: 14 },
     metaTitle: "Servicios informáticos en Turre, Levante Almeriense",
     metaDescription:
       "Soporte informático, redes, backup e IA para negocios, viviendas turísticas y PYMEs de Turre (Almería).",
@@ -302,6 +359,8 @@ export const municipalities: Municipality[] = [
     province: "Almería",
     businessProfile: "mixed",
     nearby: ["los-gallardos", "turre", "lubrin", "vera"],
+    image: null,
+    map: { lat: 37.1886, lon: -1.9836, zoom: 14 },
     metaTitle: "Informático y soporte TI en Bédar, Almería",
     metaDescription:
       "Soporte remoto y presencial, redes, copias e informática para negocios y turismo rural de Bédar.",
@@ -331,6 +390,8 @@ export const municipalities: Municipality[] = [
     province: "Almería",
     businessProfile: "mixed",
     nearby: ["bedar", "carboneras", "los-gallardos"],
+    image: coverageStill("lubrin"),
+    map: { lat: 37.2156, lon: -2.0669, zoom: 14 },
     metaTitle: "Servicios informáticos en Lubrín, Almería",
     metaDescription:
       "Mantenimiento informático, copias, redes y soporte para autónomos y pequeños negocios de Lubrín.",
@@ -360,6 +421,8 @@ export const municipalities: Municipality[] = [
     province: "Almería",
     businessProfile: "mixed",
     nearby: ["vera", "turre", "bedar", "antas"],
+    image: coverageStill("los-gallardos"),
+    map: { lat: 37.1681, lon: -1.9392, zoom: 14 },
     metaTitle: "Informática para empresas en Los Gallardos",
     metaDescription:
       "Redes de nave, servidores, soporte y ciberseguridad para empresas del corredor A-7 en Los Gallardos, Almería.",

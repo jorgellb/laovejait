@@ -181,7 +181,7 @@ export function municipalityGraph(
       faqNode(faqs, `${siteUrl}/servicios-informaticos/${slug}#faq`),
       breadcrumbNode([
         { name: "Inicio", path: "/" },
-        { name: "Servicios", path: "/servicios" },
+        { name: "Cobertura", path: "/cobertura" },
         { name, path: `/servicios-informaticos/${slug}` },
       ]),
     ],

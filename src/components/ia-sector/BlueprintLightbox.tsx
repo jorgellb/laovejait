@@ -12,9 +12,11 @@ import { CyberButton } from "@/components/ui/CyberButton";
 
 export function BlueprintLightbox({
   title,
+  actionLabel = "Ampliar esquema",
   children,
 }: {
   title: string;
+  actionLabel?: string;
   children: ReactNode;
 }) {
   const dialogRef = useRef<HTMLDialogElement>(null);
@@ -56,7 +58,7 @@ export function BlueprintLightbox({
         variant="secondary"
         onClick={() => setOpen(true)}
       >
-        Ampliar esquema
+        {actionLabel}
       </CyberButton>
       <dialog
         ref={dialogRef}

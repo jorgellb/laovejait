@@ -1,4 +1,6 @@
 import { notFound } from "next/navigation";
+import { MunicipalityFigure } from "@/components/coverage/MunicipalityFigure";
+import { MunicipalityMap } from "@/components/coverage/MunicipalityMap";
 import { CoverageMap } from "@/components/graphics/CoverageMap";
 import { FAQ } from "@/components/home/FAQ";
 import { FinalCTA } from "@/components/home/FinalCTA";
@@ -10,12 +12,15 @@ import { SectionHeading } from "@/components/ui/SectionHeading";
 import { TechPanel } from "@/components/ui/GlowBorder";
 import { municipalityFaqs } from "@/data/faqs";
 import {
+  businessProfileLabel,
   getMunicipality,
   getNearbyMunicipalities,
   municipalities,
 } from "@/data/municipalities";
+import { contactHref } from "@/data/site-nav";
 import { municipalityMetadata } from "@/lib/metadata";
 import { municipalityGraph } from "@/lib/schema";
+import { formatGeoReadout } from "@/lib/web-mercator";
 
 export const dynamicParams = false;
 
@@ -45,6 +50,11 @@ export default async function MunicipalityPage({
 
   const faqs = municipalityFaqs(data);
   const nearby = getNearbyMunicipalities(data);
+  const path = `/servicios-informaticos/${data.slug}`;
+  const contact = contactHref({
+    cta: "municipio-hero",
+    origen: path,
+  });
 
   return (
     <>
@@ -54,7 +64,7 @@ export default async function MunicipalityPage({
           <Breadcrumbs
             items={[
               { name: "Inicio", href: "/" },
-              { name: "Servicios", href: "/servicios" },
+              { name: "Cobertura", href: "/cobertura" },
               { name: data.name },
             ]}
           />
@@ -62,6 +72,8 @@ export default async function MunicipalityPage({
             {data.name.toUpperCase()}
             {" // "}
             {data.province.toUpperCase()}
+            {" // "}
+            {businessProfileLabel[data.businessProfile].toUpperCase()}
           </p>
           <h1 className="mt-4 max-w-4xl text-balance text-4xl font-semibold tracking-tight sm:text-5xl">
             Mantenimiento Informático e Inteligencia Artificial para Empresas en{" "}
@@ -71,27 +83,37 @@ export default async function MunicipalityPage({
             {data.heroDescription}
           </p>
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-            <CyberButton href="/contacto">Solicitar diagnóstico</CyberButton>
-            <CyberButton href="/servicios" variant="secondary">
-              Ver servicios
+            <CyberButton href={contact}>Solicitar diagnóstico</CyberButton>
+            <CyberButton href="#mapa" variant="secondary">
+              Ver mapa
             </CyberButton>
           </div>
         </div>
       </article>
 
-      <section className="border-b border-border px-4 py-16 sm:px-6">
-        <div className="mx-auto grid max-w-7xl gap-8 lg:grid-cols-[1.2fr_0.8fr]">
-          <div>
-            <SectionHeading title={`Trabajo real en ${data.name}`} />
-            <p className="mt-6 max-w-3xl text-muted">{data.intro}</p>
-            <h2 className="mt-10 text-2xl font-semibold sm:text-3xl">
-              {data.sectorHeading}
-            </h2>
-            <p className="mt-4 max-w-3xl text-muted">{data.sectorBody}</p>
+      {data.image ? (
+        <section
+          id="ficha"
+          className="scroll-mt-28 border-b border-border px-4 py-12 sm:px-6"
+        >
+          <div className="mx-auto max-w-7xl">
+            <MunicipalityFigure municipality={data} priority />
           </div>
+        </section>
+      ) : null}
+
+      <section
+        id="mapa"
+        className="scroll-mt-28 border-b border-border px-4 py-16 sm:px-6"
+      >
+        <div className="mx-auto grid max-w-7xl items-start gap-8 lg:grid-cols-[minmax(0,1.2fr)_minmax(0,0.8fr)]">
+          <MunicipalityMap municipality={data} />
           <TechPanel>
             <p className="tech-label">ENFOQUE LOCAL</p>
-            <ul className="mt-4 space-y-3 text-sm text-muted">
+            <p className="mt-3 font-mono text-[0.62rem] tracking-[0.14em] text-muted">
+              {formatGeoReadout(data.map.lat, data.map.lon)}
+            </p>
+            <ul className="mt-5 space-y-3 text-sm text-muted">
               {data.localServices.map((item) => (
                 <li key={item} className="flex gap-2">
                   <span className="mt-1.5 size-1 shrink-0 bg-cyan" />
@@ -100,6 +122,17 @@ export default async function MunicipalityPage({
               ))}
             </ul>
           </TechPanel>
+        </div>
+      </section>
+
+      <section className="border-b border-border px-4 py-16 sm:px-6">
+        <div className="mx-auto max-w-7xl">
+          <SectionHeading title={`Trabajo real en ${data.name}`} />
+          <p className="mt-6 max-w-3xl text-muted">{data.intro}</p>
+          <h2 className="mt-10 text-2xl font-semibold sm:text-3xl">
+            {data.sectorHeading}
+          </h2>
+          <p className="mt-4 max-w-3xl text-muted">{data.sectorBody}</p>
         </div>
       </section>
 

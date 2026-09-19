@@ -72,6 +72,15 @@ export function documentMetadata(
 
 export function municipalityMetadata(municipality: Municipality): Metadata {
   const path = `/servicios-informaticos/${municipality.slug}`;
+  const images = municipality.image
+    ? [
+        {
+          url: municipality.image.src,
+          width: municipality.image.width,
+          height: municipality.image.height,
+        },
+      ]
+    : undefined;
   return {
     title: { absolute: municipality.metaTitle },
     description: municipality.metaDescription,
@@ -83,11 +92,13 @@ export function municipalityMetadata(municipality: Municipality): Metadata {
       siteName: companyConfig.legalName,
       title: municipality.metaTitle,
       description: municipality.metaDescription,
+      images,
     },
     twitter: {
       card: "summary_large_image",
       title: municipality.metaTitle,
       description: municipality.metaDescription,
+      images: images?.map((item) => item.url),
     },
   };
 }

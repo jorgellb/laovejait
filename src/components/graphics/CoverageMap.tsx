@@ -1,9 +1,12 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { useMemo, useState } from "react";
 import { coverageNodes, coverageViewBox, landPath, coastPath } from "@/data/coverage-geo";
 import {
+  businessProfileCode,
+  businessProfileLabel,
   getMunicipality,
   municipalityHref,
   type BusinessProfile,
@@ -17,18 +20,6 @@ const profileClass: Record<BusinessProfile, string> = {
   mixed: "fill-foreground",
 };
 
-const profileLabel: Record<BusinessProfile, string> = {
-  tourism: "Hostelería y costa",
-  industry: "Industria y comercio",
-  mixed: "Mixto / interior",
-};
-
-const profileCode: Record<BusinessProfile, string> = {
-  tourism: "TOURISM NODE",
-  industry: "BUSINESS NODE",
-  mixed: "MIXED NODE",
-};
-
 function nodeBySlug(slug: string) {
   return coverageNodes.find((item) => item.slug === slug);
 }
@@ -36,10 +27,11 @@ function nodeBySlug(slug: string) {
 function previewFor(municipality: Municipality) {
   return {
     title: municipality.name,
-    code: profileCode[municipality.businessProfile],
-    profile: profileLabel[municipality.businessProfile],
+    code: businessProfileCode[municipality.businessProfile],
+    profile: businessProfileLabel[municipality.businessProfile],
     items: municipality.localServices.slice(0, 4),
     href: municipalityHref(municipality.slug),
+    image: municipality.image,
   };
 }
 
@@ -228,7 +220,19 @@ export function CoverageMap({
         </g>
       </svg>
       {preview ? (
-        <div className="coverage-preview pointer-events-none absolute right-3 bottom-3 hidden max-w-[16rem] border border-cyan/40 bg-[#030712]/95 p-3 sm:block">
+        <div className="coverage-preview pointer-events-none absolute right-3 bottom-3 hidden w-[17.5rem] border border-cyan/40 bg-[#030712]/95 p-3 sm:block">
+          {preview.image ? (
+            <div className="relative mb-3 aspect-video overflow-hidden border border-border bg-[#050914]">
+              <Image
+                src={preview.image.src}
+                alt=""
+                width={preview.image.width}
+                height={preview.image.height}
+                sizes="280px"
+                className="h-full w-full object-cover"
+              />
+            </div>
+          ) : null}
           <p className="font-mono text-[0.58rem] tracking-[0.16em] text-cyan">
             {preview.title.toUpperCase()}
           </p>
@@ -248,6 +252,18 @@ export function CoverageMap({
       ) : null}
       {preview ? (
         <div className="mt-4 border border-border bg-background-panel/90 p-4 sm:hidden">
+          {preview.image ? (
+            <div className="relative mb-3 aspect-video overflow-hidden border border-border bg-[#050914]">
+              <Image
+                src={preview.image.src}
+                alt={`Ilustración conceptual de servicio informático en ${preview.title}.`}
+                width={preview.image.width}
+                height={preview.image.height}
+                sizes="100vw"
+                className="h-full w-full object-cover"
+              />
+            </div>
+          ) : null}
           <p className="font-mono text-[0.58rem] tracking-[0.16em] text-cyan">
             {preview.title.toUpperCase()}
           </p>

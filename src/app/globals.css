@@ -351,6 +351,10 @@ body::before {
   opacity: 0.7;
 }
 
+.municipality-map-tiles {
+  filter: saturate(0.55) contrast(1.18) brightness(0.82);
+}
+
 @keyframes hud-scan {
   from {
     background-position: 0 -40%;
@@ -448,6 +452,10 @@ body::before {
   .packet-ok,
   .packet-block {
     animation: none;
+  }
+
+  .municipality-map-tiles {
+    filter: none;
   }
 
   .service-card,

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { MunicipalityDossierGrid } from "@/components/coverage/MunicipalityDossier";
 import { CoverageLegend, CoverageMap } from "@/components/graphics/CoverageMap";
 import { PageFaqs, PageHero, RelatedSystems } from "@/components/pages/PageChrome";
 import { MunicipalityLink } from "@/components/ui/MunicipalityLink";
@@ -78,6 +79,20 @@ export default function CoberturaPage() {
                 />
               ))}
             </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="border-b border-border px-4 py-16 sm:px-6">
+        <div className="mx-auto max-w-7xl">
+          <p className="tech-label">FICHAS LOCALES</p>
+          <h2 className="mt-3 text-3xl font-semibold">Doce nodos, doce landings</h2>
+          <p className="mt-4 max-w-2xl text-muted">
+            Cada ficha tiene mapa del núcleo urbano. Once municipios tienen
+            ilustración propia; Bédar abre igual, sin inventar una foto.
+          </p>
+          <div className="mt-8">
+            <MunicipalityDossierGrid />
           </div>
         </div>
       </section>

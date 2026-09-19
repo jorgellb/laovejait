@@ -38,10 +38,12 @@ export function CyberButton({
   );
 
   if (href) {
+    const hash = href.startsWith("#");
     const external =
       href.startsWith("http") ||
       href.startsWith("tel:") ||
-      href.startsWith("mailto:");
+      href.startsWith("mailto:") ||
+      hash;
     if (external) {
       const newTab = href.startsWith("http");
       return (
